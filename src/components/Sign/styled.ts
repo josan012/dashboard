@@ -68,7 +68,7 @@ export const Style = styled.div`
     content: "";
     position: absolute;
     right: 34%;
-    top: 8px;
+    top: 12px;
     bottom: 0;
     width: 50px;
     height: 20px;
@@ -77,17 +77,23 @@ export const Style = styled.div`
     z-index: 99999;
   }
 
-  input[type="submit"] {
+  Button {
     width: 80%;
     display: block;
     margin: 0 auto;
-    padding: 10px 0 30px 0;
+    padding: 10px 0 10px 0;
     background-color: #2196f3;
-    color: white;
+    color: #ffffff;
     border: 1px solid #dcdcdc;
     border-radius: 10px;
     cursor: pointer;
     position: relative;
+    text-transform: capitalize;
+  }
+
+  Button:hover {
+    color: #2196f3;
+    background-color: white;
   }
 
   .forgot {
@@ -105,6 +111,21 @@ export const Style = styled.div`
   }
 
   a:active {
+    color: #2196f3;
+  }
+
+  .link {
+    width: 100%;
+    display: block;
+    color: white;
+    height: 20px;
+  }
+
+  .link:visited {
+    color: white;
+  }
+
+  .link:hover {
     color: #2196f3;
   }
 `;

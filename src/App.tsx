@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Registration from "./components/Registration";
 import Sign from "./components/Sign";
+import Panel from "./components/Panel";
 
 function App() {
   const [active, setActive] = useState(false);
@@ -15,8 +16,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Panel />} />
+          <Route path="/sign" element={<Sign />} />
           <Route
-            path="/"
+            path="/registration"
             element={
               <Registration
                 active={active}
@@ -24,9 +27,9 @@ function App() {
               />
             }
           />
-          <Route path="/sign" element={<Sign />} />
         </Routes>
       </BrowserRouter>
+      {/* <Panel /> */}
     </div>
   );
 }

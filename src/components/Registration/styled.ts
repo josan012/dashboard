@@ -162,5 +162,39 @@ export const Style = styled.div`
   a:active {
     color: #2196f3;
   }
+
+  .link {
+    width: 100%;
+    display: block;
+    color: white;
+    height: 20px;
+  }
+
+  .link:visited {
+    color: white;
+  }
+
+  .link:hover {
+    color: #2196f3;
+  }
+
+  Button {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    padding: 10px 0 10px 0;
+    background-color: #2196f3;
+    color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    text-transform: capitalize;
+  }
+
+  Button:hover {
+    color: #2196f3;
+    background-color: white;
+  }
 `;
 export default Style;

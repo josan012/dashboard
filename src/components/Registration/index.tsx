@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Style from "./styled";
+import Button from "@mui/material/Button";
 
 interface Props {
   active: boolean;
@@ -79,7 +80,11 @@ const Registration: React.FC<Props> = ({ active, handleChangeActive }) => {
                   </label>
                 </div>
                 <div className="submit">
-                  <input type="submit" value="Sign Up" />
+                  <Button>
+                    <Link to="/sign" className="link">
+                      Sign Up
+                    </Link>
+                  </Button>
                 </div>
               </form>
             </div>

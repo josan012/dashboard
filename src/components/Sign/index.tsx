@@ -1,5 +1,6 @@
 import Style from "./styled";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const Sign = () => {
   return (
@@ -11,7 +12,7 @@ const Sign = () => {
             <p className="already">
               Do not have an account?
               <span className="sign-up">
-                <Link to="/">Sign Up</Link>
+                <Link to="/registration">Sign Up</Link>
               </span>
             </p>
           </div>
@@ -37,7 +38,11 @@ const Sign = () => {
             </span>
           </div>
           <div className="submit">
-            <input type="submit" value="Sign Up" />
+            <Button>
+              <Link to="/" className="link">
+                Sign In
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
