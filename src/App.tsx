@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Registration from "./components/Registration";
+import Sign from "./components/Sign";
 
 function App() {
+  const [active, setActive] = useState(false);
+
+  const handleChangeActive = () => {
+    setActive((previousEye) => {
+      return !previousEye;
+    });
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Registration
+                active={active}
+                handleChangeActive={handleChangeActive}
+              />
+            }
+          />
+          <Route path="/sign" element={<Sign />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
