@@ -20,6 +20,8 @@ export const Style = styled.div`
   .left {
     width: 100%;
     height: 100vh;
+    border-right: 1px solid #000000;
+    padding-right: 10px;
   }
 
   Button {

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Registration from "./components/Registration";
 import Sign from "./components/Sign";
 import Panel from "./components/Panel";
+import EditPage from "./components/EditPage";
 
 function App() {
   const [active, setActive] = useState(false);
@@ -27,9 +28,9 @@ function App() {
               />
             }
           />
+          <Route path="/edit/:id" element={<EditPage />} />
         </Routes>
       </BrowserRouter>
-      {/* <Panel /> */}
     </div>
   );
 }

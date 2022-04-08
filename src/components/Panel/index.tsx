@@ -1,13 +1,38 @@
 import Style from "./styled";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Users from "../Users";
 import Posts from "../Posts";
 import Dashboard from "../Dashboard";
 
+interface User {
+  id: number;
+  fullname: string;
+  country: string;
+  number: string;
+  email: string;
+}
+
 const Panel = () => {
-  const [active, setActive] = useState("dashboard");
+  const [active, setActive] = useState("users");
+
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+  async function getAllUsers() {
+    try {
+      const users = await axios.get("http://localhost:3333/users");
+      console.log(users.data);
+      setUsers(users.data);
+    } catch (error) {
+      console.log("Something is wrong");
+    }
+  }
 
   return (
     <Style>
@@ -33,7 +58,7 @@ const Panel = () => {
                 <Link to="/registration">Sign Up</Link>
               </span>
             </div>
-            {active === "users" && <Users />}
+            {active === "users" && <Users user={users} />}
             {active === "posts" && <Posts />}
             {active === "dashboard" && <Dashboard />}
           </div>

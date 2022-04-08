@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import Style from "./styled";
 import Button from "@mui/material/Button";
 
@@ -19,6 +20,33 @@ const Registration: React.FC<Props> = ({ active, handleChangeActive }) => {
     togglePassword();
     handleChangeActive();
   };
+
+  const [user, setUser] = useState({
+    fullname: "",
+    country: "",
+    number: "",
+    email: "",
+  });
+
+  function onTextFieldChange(e: ChangeEvent<HTMLInputElement>) {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+    console.log(user);
+  }
+
+  async function onFormSubmit(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    e.preventDefault();
+    try {
+      await axios.post(`http://localhost:3333/users`, user);
+    } catch (error) {
+      console.log("Something is Wrong");
+    }
+  }
+
   return (
     <Style>
       <div className="center">
@@ -35,14 +63,30 @@ const Registration: React.FC<Props> = ({ active, handleChangeActive }) => {
             </div>
             <div className="center">
               <form>
-                <input type="text" placeholder="Full Name" />
-                <input type="text" placeholder="Country" />
-                <input type="text" placeholder="Phone Number" />
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  name="fullname"
+                  onChange={(e) => onTextFieldChange(e)}
+                />
+                <input
+                  type="text"
+                  name="country"
+                  placeholder="Country"
+                  onChange={(e) => onTextFieldChange(e)}
+                />
+                <input
+                  type="text"
+                  name="number"
+                  placeholder="Phone Number"
+                  onChange={(e) => onTextFieldChange(e)}
+                />
                 <input
                   type="email"
                   name="email"
                   id="email"
                   placeholder="Email address"
+                  onChange={(e) => onTextFieldChange(e)}
                 />
                 <div className="password-field">
                   {active ? (
@@ -80,7 +124,7 @@ const Registration: React.FC<Props> = ({ active, handleChangeActive }) => {
                   </label>
                 </div>
                 <div className="submit">
-                  <Button>
+                  <Button type="submit" onClick={(e) => onFormSubmit(e)}>
                     <Link to="/sign" className="link">
                       Sign Up
                     </Link>

@@ -71,7 +71,7 @@ export const Style = styled.div`
     content: "";
     position: absolute;
     margin-top: 18px;
-    left: 65%;
+    margin-left: 37%;
     width: 25px;
     height: 20px;
     background: url("/eye.svg");
