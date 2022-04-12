@@ -1,8 +1,8 @@
 import Style from "./styled";
 import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
-import EditIcon from "../EditIcon";
-import DeleteIcon from "../DeleteIcon";
+import EditIcon from "../../icons/EditIcon";
+import DeleteIcon from "../../icons/DeleteIcon";
 import axios from "axios";
 import { useState } from "react";
 

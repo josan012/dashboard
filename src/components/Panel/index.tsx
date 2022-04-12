@@ -51,12 +51,14 @@ const Panel = () => {
           </div>
           <div className="left">
             <div className="corner">
-              <span>
-                <Link to="/sign">Sign In</Link>
-              </span>
-              <span>
-                <Link to="/registration">Sign Up</Link>
-              </span>
+              <div className="sign">
+                <span>
+                  <Link to="/sign">Sign In</Link>
+                </span>
+                <span>
+                  <Link to="/registration">Sign Up</Link>
+                </span>
+              </div>
             </div>
             {active === "users" && <Users user={users} />}
             {active === "posts" && <Posts />}

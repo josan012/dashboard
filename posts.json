@@ -1,0 +1,52 @@
+{
+  "posts": [
+    {
+      "title": "Orders",
+      "description": "Aici va fi informatia despre orders",
+      "date": "09.04.2022",
+      "user": "Mihai"
+    },
+    {
+      "title": "Food",
+      "description": "Aici va fi informatia despre mancare",
+      "date": "10.04.2022",
+      "user": "Vlada"
+    },
+    {
+      "title": "Drinks",
+      "description": "Aici va fi informatia despre bauturi",
+      "date": "11.04.2022",
+      "user": "Cristian"
+    },
+    {
+      "title": "Feedback",
+      "description": "Aici va fi informatia despre recenzii",
+      "date": "12.04.2022",
+      "user": "Valentin"
+    },
+    {
+      "title": "Orders",
+      "description": "Aici va fi informatia despre orders",
+      "date": "09.04.2022",
+      "user": "Mihai"
+    },
+    {
+      "title": "Food",
+      "description": "Aici va fi informatia despre mancare",
+      "date": "10.04.2022",
+      "user": "Vlada"
+    },
+    {
+      "title": "Drinks",
+      "description": "Aici va fi informatia despre bauturi",
+      "date": "11.04.2022",
+      "user": "Cristian"
+    },
+    {
+      "title": "Feedback",
+      "description": "Aici va fi informatia despre recenzii",
+      "date": "12.04.2022",
+      "user": "Valentin"
+    }
+  ]
+}

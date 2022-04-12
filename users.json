@@ -55,6 +55,20 @@
       "number": "012345678",
       "email": "igor.ciobanu@gmail.com",
       "id": 8
+    },
+    {
+      "fullname": "Plosnita Dumitru",
+      "country": "Moldova",
+      "number": "068321985",
+      "email": "plosnita.dumitru@gmail.com",
+      "id": 9
+    },
+    {
+      "fullname": "Plamadeala Nicolae",
+      "country": "Moldova",
+      "number": "123456789",
+      "email": "nicu.plamadeala@gmail.com",
+      "id": 10
     }
   ]
 }

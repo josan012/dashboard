@@ -34,6 +34,7 @@ const Registration: React.FC<Props> = ({ active, handleChangeActive }) => {
       [e.target.name]: e.target.value,
     });
     console.log(user);
+    localStorage.setItem("user", JSON.stringify(user));
   }
 
   async function onFormSubmit(
@@ -42,6 +43,7 @@ const Registration: React.FC<Props> = ({ active, handleChangeActive }) => {
     e.preventDefault();
     try {
       await axios.post(`http://localhost:3333/users`, user);
+      localStorage.setItem("user", JSON.stringify(user));
     } catch (error) {
       console.log("Something is Wrong");
     }
