@@ -1,52 +1,60 @@
 {
   "posts": [
     {
+      "id": "1",
       "title": "Orders",
       "description": "Aici va fi informatia despre orders",
       "date": "09.04.2022",
-      "user": "Mihai"
+      "user": "Valentin"
     },
     {
+      "id": "2",
       "title": "Food",
       "description": "Aici va fi informatia despre mancare",
       "date": "10.04.2022",
       "user": "Vlada"
     },
     {
-      "title": "Drinks",
-      "description": "Aici va fi informatia despre bauturi",
-      "date": "11.04.2022",
-      "user": "Cristian"
-    },
-    {
-      "title": "Feedback",
-      "description": "Aici va fi informatia despre recenzii",
-      "date": "12.04.2022",
-      "user": "Valentin"
-    },
-    {
+      "id": "3",
       "title": "Orders",
       "description": "Aici va fi informatia despre orders",
       "date": "09.04.2022",
-      "user": "Mihai"
+      "user": "Valentin"
     },
     {
+      "id": "4",
       "title": "Food",
       "description": "Aici va fi informatia despre mancare",
       "date": "10.04.2022",
       "user": "Vlada"
     },
     {
-      "title": "Drinks",
-      "description": "Aici va fi informatia despre bauturi",
-      "date": "11.04.2022",
-      "user": "Cristian"
+      "id": "5",
+      "title": "Orders",
+      "description": "Aici va fi informatia despre orders",
+      "date": "09.04.2022",
+      "user": "Valentin"
     },
     {
-      "title": "Feedback",
-      "description": "Aici va fi informatia despre recenzii",
-      "date": "12.04.2022",
+      "id": "6",
+      "title": "Food",
+      "description": "Aici va fi informatia despre mancare",
+      "date": "10.04.2022",
+      "user": "Vlada"
+    },
+    {
+      "id": "7",
+      "title": "Orders",
+      "description": "Aici va fi informatia despre orders",
+      "date": "09.04.2022",
       "user": "Valentin"
+    },
+    {
+      "id": "8",
+      "title": "Food",
+      "description": "Aici va fi informatia despre mancare",
+      "date": "10.04.2022",
+      "user": "Vlada"
     }
   ]
 }

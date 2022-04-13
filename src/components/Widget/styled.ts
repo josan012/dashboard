@@ -27,5 +27,31 @@ export const Style = styled.div`
   .date {
     margin-left: 8px;
   }
+
+  .edit {
+    margin-left: 8px;
+    display: flex;
+    justify-content: baseline;
+    width: auto;
+    margin-right: 57px;
+  }
+
+  .delete {
+    float: right;
+    margin-right: 8px;
+    display: flex;
+    justify-content: baseline;
+    width: auto;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: baseline;
+  }
+
+  .delete:hover,
+  .edit:hover {
+    cursor: pointer;
+  }
 `;
 export default Style;

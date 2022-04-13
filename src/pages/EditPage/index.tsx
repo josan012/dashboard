@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Style from "./styled";
 import Button from "@mui/material/Button";
 
-const Registration = () => {
+const EditPage = () => {
   const { id } = useParams();
   const history = useNavigate();
   const [user, setUser] = useState({
@@ -104,4 +104,4 @@ const Registration = () => {
     </Style>
   );
 };
-export default Registration;
+export default EditPage;
