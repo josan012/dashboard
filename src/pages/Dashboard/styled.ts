@@ -59,5 +59,12 @@ export const Style = styled.div`
   a:active {
     color: #2196f3;
   }
+
+  .posts,
+  .users,
+  .dashboard {
+    text-align: center;
+    height: 30px;
+  }
 `;
 export default Style;

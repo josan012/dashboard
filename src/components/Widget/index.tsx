@@ -1,8 +1,6 @@
 import Style from "./styled";
 import DeleteIcon from "../../icons/DeleteIcon";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
 
 interface Post {
   id: number;

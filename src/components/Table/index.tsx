@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "../../icons/EditIcon";
 import DeleteIcon from "../../icons/DeleteIcon";
-import axios from "axios";
-import { useState } from "react";
 
 interface User {
   id: number;
@@ -17,20 +15,10 @@ interface User {
 interface Props {
   user: User[];
   onSuccess: () => void;
+  setUserId: (postId: number) => void;
 }
 
-const Table: React.FC<Props> = ({ user, onSuccess }) => {
-  const [users, setUsers] = useState<User[]>([]);
-  const handleDelete = async (id: number) => {
-    await axios
-      .delete(`http://localhost:3333/users/${id}`)
-      .then(() => onSuccess());
-    var newuser = users.filter((item) => {
-      return item.id !== id;
-    });
-    setUsers(newuser);
-  };
-
+const Table: React.FC<Props> = ({ user, onSuccess, setUserId }) => {
   return (
     <Style>
       <div className="center">
@@ -62,7 +50,7 @@ const Table: React.FC<Props> = ({ user, onSuccess }) => {
                       <IconButton
                         className="icon"
                         aria-label="Delete"
-                        onClick={() => handleDelete(user.id)}
+                        onClick={() => setUserId(user.id)}
                       >
                         <DeleteIcon />
                       </IconButton>
