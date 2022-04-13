@@ -15,13 +15,24 @@ interface User {
   email: string;
 }
 
-const Panel = () => {
+interface Post {
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+  user: string;
+}
+
+const Panel: React.FC = () => {
   const [active, setActive] = useState("users");
 
   const [users, setUsers] = useState<User[]>([]);
 
+  const [posts, setPosts] = useState<Post[]>([]);
+
   useEffect(() => {
     getAllUsers();
+    getAllPosts();
   }, []);
 
   async function getAllUsers() {
@@ -34,6 +45,15 @@ const Panel = () => {
     }
   }
 
+  async function getAllPosts() {
+    try {
+      const posts = await axios.get("http://localhost:4444/posts");
+      console.log(posts.data);
+      setPosts(posts.data);
+    } catch (error) {
+      console.log("Something is wrong");
+    }
+  }
   return (
     <Style>
       <div className="center">
@@ -61,7 +81,7 @@ const Panel = () => {
               </div>
             </div>
             {active === "users" && <Users user={users} />}
-            {active === "posts" && <Posts />}
+            {active === "posts" && <Posts posts={posts} />}
             {active === "dashboard" && <Dashboard />}
           </div>
         </div>
