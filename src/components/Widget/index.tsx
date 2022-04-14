@@ -37,7 +37,7 @@ const Widget: React.FC<Props> = ({
         <span className="util">{user}</span>
         <div className="actions">
           <span className="edit">
-            <Link to={`post/edit/${post.id}`}>Editare</Link>
+            <Link to={`/posts/edit/${post.id}`}>Editare</Link>
           </span>
           <span className="delete" onClick={() => setPostId(post.id)}>
             Stergere <DeleteIcon />

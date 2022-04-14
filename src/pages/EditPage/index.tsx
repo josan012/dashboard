@@ -13,6 +13,7 @@ const EditPage = () => {
     country: "",
     number: "",
     email: "",
+    gender: "",
   });
 
   useEffect(() => {
@@ -40,6 +41,14 @@ const EditPage = () => {
   }
 
   function onTextFieldChange(e: ChangeEvent<HTMLInputElement>) {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+    console.log(user);
+  }
+
+  function onSelectChange(e: ChangeEvent<HTMLSelectElement>) {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
@@ -86,7 +95,21 @@ const EditPage = () => {
                   value={user.email}
                   onChange={(e) => onTextFieldChange(e)}
                 />
-
+                <div className="gender">
+                  <select
+                    id="genderselect"
+                    name="gender"
+                    value={user.gender}
+                    onChange={(e) => onSelectChange(e)}
+                  >
+                    <option value="none" selected>
+                      Select Gender
+                    </option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">other</option>
+                  </select>
+                </div>
                 <div className="submit">
                   <Button
                     type="submit"

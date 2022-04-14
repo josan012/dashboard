@@ -1,31 +1,31 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Style from "./styled";
 import Button from "@mui/material/Button";
+import PasswordInputField from "../../components/PasswordInputField";
+import ConfirmPasswordInputField from "../../components/ConfirmPasswordInputField";
 
 interface Props {
   active: boolean;
+  confirmActive: boolean;
   handleChangeActive: () => void;
+  handleConfirmChangeActive: () => void;
 }
 
-const Registration: React.FC<Props> = ({ active, handleChangeActive }) => {
-  const [passwordShown, setPasswordShown] = useState(false);
-
-  const togglePassword = () => {
-    setPasswordShown(!passwordShown);
-  };
-
-  const showPassword = () => {
-    togglePassword();
-    handleChangeActive();
-  };
-
+const Registration: React.FC<Props> = ({
+  active,
+  confirmActive,
+  handleChangeActive,
+  handleConfirmChangeActive,
+}) => {
   const [user, setUser] = useState({
     fullname: "",
     country: "",
     number: "",
     email: "",
+    gender: "",
   });
 
   function onTextFieldChange(e: ChangeEvent<HTMLInputElement>) {
@@ -35,6 +35,14 @@ const Registration: React.FC<Props> = ({ active, handleChangeActive }) => {
     });
     console.log(user);
     localStorage.setItem("user", JSON.stringify(user));
+  }
+
+  function onSelectChange(e: ChangeEvent<HTMLSelectElement>) {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+    console.log(user);
   }
 
   async function onFormSubmit(
@@ -48,6 +56,74 @@ const Registration: React.FC<Props> = ({ active, handleChangeActive }) => {
       console.log("Something is Wrong");
     }
   }
+
+  const [passwordError, setPasswordErr] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [passwordInput, setPasswordInput] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handlePasswordChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const passwordInputValue = event.target.value.trim();
+    const passwordInputFieldName = event.target.name;
+    const NewPasswordInput = {
+      ...passwordInput,
+      [passwordInputFieldName]: passwordInputValue,
+    };
+    setPasswordInput(NewPasswordInput);
+  };
+  const handleValidation = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const passwordInputValue = event.target.value.trim();
+    const passwordInputFieldName = event.target.name;
+
+    if (passwordInputFieldName === "password") {
+      const uppercaseRegExp = /(?=.*?[A-Z])/;
+      const lowercaseRegExp = /(?=.*?[a-z])/;
+      const digitsRegExp = /(?=.*?[0-9])/;
+      const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/;
+      const minLengthRegExp = /.{8,}/;
+      const passwordLength = passwordInputValue.length;
+      const uppercasePassword = uppercaseRegExp.test(passwordInputValue);
+      const lowercasePassword = lowercaseRegExp.test(passwordInputValue);
+      const digitsPassword = digitsRegExp.test(passwordInputValue);
+      const specialCharPassword = specialCharRegExp.test(passwordInputValue);
+      const minLengthPassword = minLengthRegExp.test(passwordInputValue);
+      let errMsg = "";
+      if (passwordLength === 0) {
+        errMsg = "Password is empty";
+      } else if (!uppercasePassword) {
+        errMsg = "At least one Uppercase";
+      } else if (!lowercasePassword) {
+        errMsg = "At least one Lowercase";
+      } else if (!digitsPassword) {
+        errMsg = "At least one digit";
+      } else if (!specialCharPassword) {
+        errMsg = "At least one Special Characters";
+      } else if (!minLengthPassword) {
+        errMsg = "At least minumum 8 characters";
+      } else {
+        errMsg = "";
+      }
+      setPasswordErr(errMsg);
+    }
+
+    if (
+      passwordInputFieldName === "confirmPassword" ||
+      (passwordInputFieldName === "password" &&
+        passwordInput.confirmPassword.length > 0)
+    ) {
+      if (passwordInput.confirmPassword !== passwordInput.password) {
+        setConfirmPasswordError("Confirm password is not matched");
+      } else {
+        setConfirmPasswordError("");
+      }
+    }
+  };
 
   return (
     <Style>
@@ -90,24 +166,48 @@ const Registration: React.FC<Props> = ({ active, handleChangeActive }) => {
                   placeholder="Email address"
                   onChange={(e) => onTextFieldChange(e)}
                 />
-                <div className="password-field">
-                  {active ? (
-                    <span>
-                      <i className="pass" onClick={() => showPassword()}></i>
-                    </span>
-                  ) : (
-                    <span>
-                      <i
-                        className="password"
-                        onClick={() => showPassword()}
-                      ></i>
-                    </span>
-                  )}
-                  <input
-                    type={passwordShown ? "text" : "password"}
-                    name="password"
-                    id="password"
-                    placeholder="Password"
+                <div className="gender">
+                  <select
+                    id="genderselect"
+                    name="gender"
+                    onChange={(e) => onSelectChange(e)}
+                  >
+                    <option
+                      value="none"
+                      selected
+                      disabled
+                      label="Select Gender"
+                    >
+                      Select Gender
+                    </option>
+                    <option value="male" label="Male">
+                      Male
+                    </option>
+                    <option value="female" label="Female">
+                      Female
+                    </option>
+                    <option value="other" label="Other">
+                      other
+                    </option>
+                  </select>
+                </div>
+
+                <div className="parola">
+                  <PasswordInputField
+                    handleChangeActive={handleChangeActive}
+                    active={active}
+                    handlePasswordChange={handlePasswordChange}
+                    handleValidation={handleValidation}
+                    passwordValue={passwordInput.password}
+                    passwordError={passwordError}
+                  />
+                  <ConfirmPasswordInputField
+                    confirmActive={confirmActive}
+                    handleConfirmChangeActive={handleConfirmChangeActive}
+                    handlePasswordChange={handlePasswordChange}
+                    handleValidation={handleValidation}
+                    confirmPasswordValue={passwordInput.confirmPassword}
+                    confirmPasswordError={confirmPasswordError}
                   />
                 </div>
                 <div className="check">

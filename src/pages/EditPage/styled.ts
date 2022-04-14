@@ -62,5 +62,16 @@ export const Style = styled.div`
     cursor: pointer;
     position: relative;
   }
+
+  select {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    height: 60px;
+    margin-bottom: 10px;
+    text-indent: 5px;
+    border-radius: 10px;
+    background-color: white;
+  }
 `;
 export default Style;

@@ -10,6 +10,7 @@ interface User {
   country: string;
   number: string;
   email: string;
+  gender: string;
 }
 
 interface Props {
@@ -29,6 +30,7 @@ const Table: React.FC<Props> = ({ user, onSuccess, setUserId }) => {
             <th>Country</th>
             <th>Number</th>
             <th>Email</th>
+            <th>Gender</th>
             <th>Action</th>
           </thead>
           {user.map((user, i) => {
@@ -40,10 +42,11 @@ const Table: React.FC<Props> = ({ user, onSuccess, setUserId }) => {
                   <td>{user.country}</td>
                   <td>{user.number}</td>
                   <td>{user.email}</td>
+                  <td>{user.gender}</td>
                   <td className="icon">
                     <div className="grid">
                       <IconButton className="icon" aria-label="Edit">
-                        <Link to={`/edit/${user.id}`}>
+                        <Link to={`/users/edit/${user.id}`}>
                           <EditIcon />
                         </Link>
                       </IconButton>

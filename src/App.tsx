@@ -14,6 +14,7 @@ interface User {
   country: string;
   number: string;
   email: string;
+  gender: string;
 }
 
 interface Post {
@@ -26,9 +27,14 @@ interface Post {
 
 function App() {
   const [active, setActive] = useState(false);
+  const [confirmActive, setConfirmActive] = useState(false);
 
   const handleChangeActive = () => {
     setActive((previousEye) => !previousEye);
+  };
+
+  const handleConfirmChangeActive = () => {
+    setConfirmActive((previousConfirmEye) => !previousConfirmEye);
   };
 
   const [users] = useState<User[]>([]);
@@ -45,13 +51,15 @@ function App() {
             path="/registration"
             element={
               <Registration
+                confirmActive={confirmActive}
                 active={active}
                 handleChangeActive={handleChangeActive}
+                handleConfirmChangeActive={handleConfirmChangeActive}
               />
             }
           />
-          <Route path="/edit/:id" element={<EditPage />} />
-          <Route path="/post/edit/:id" element={<PostEdit />} />
+          <Route path="/users/edit/:id" element={<EditPage />} />
+          <Route path="/posts/edit/:id" element={<PostEdit />} />
           <Route path="/users" element={<Users user={users} />} />
           <Route path="/posts" element={<Posts posts={posts} />} />
           <Route path="/dashboard" element={<Dashboard />} />

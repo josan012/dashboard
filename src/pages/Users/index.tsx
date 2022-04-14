@@ -14,6 +14,7 @@ interface User {
   country: string;
   number: string;
   email: string;
+  gender: string;
 }
 
 interface Props {

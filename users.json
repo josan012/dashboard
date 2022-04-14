@@ -5,41 +5,47 @@
       "fullname": "Josan Mihai",
       "country": "Moldova",
       "number": "068383476",
-      "email": "mihai.josan@gmail.com"
+      "email": "mihai.josan@gmail.com",
+      "gender": "male"
     },
     {
       "id": 2,
       "fullname": "Gherasim Vlada",
       "country": "Romania",
       "number": "069348763",
-      "email": "vlada.gherasim@gmail.com"
+      "email": "vlada.gherasim@gmail.com",
+      "gender": "female"
     },
     {
       "id": 3,
       "fullname": "Zop Valentin",
       "country": "Moldova",
       "number": "060123098",
-      "email": "valentin.zop@gmail.com"
+      "email": "valentin.zop@gmail.com",
+      "gender": "male"
     },
     {
       "id": 4,
       "fullname": "Ciorba Alexandru",
       "country": "Romania",
       "number": "067983248",
-      "email": "alexandru.ciorba@gmail.com"
+      "email": "alexandru.ciorba@gmail.com",
+      "gender": "male"
     },
     {
       "id": 5,
       "fullname": "Cornitel Daniel",
       "country": "Moldova",
       "number": "068734213",
-      "email": "daniel.cornitel@gmail.com"
+      "email": "daniel.cornitel@gmail.com",
+      "gender": "male"
     },
     {
       "fullname": "Potorac Mihai",
       "country": "Moldova",
       "number": "067123456",
       "email": "mihaipotorac@gmail.com",
+      "gender": "male",
       "id": 6
     },
     {
@@ -47,6 +53,7 @@
       "country": "Romania",
       "number": "068325872",
       "email": "veronica.jian@gmail.com",
+      "gender": "female",
       "id": 7
     },
     {
@@ -54,6 +61,7 @@
       "country": "Moldova",
       "number": "012345678",
       "email": "igor.ciobanu@gmail.com",
+      "gender": "male",
       "id": 8
     },
     {
@@ -61,6 +69,7 @@
       "country": "Moldova",
       "number": "068321985",
       "email": "plosnita.dumitru@gmail.com",
+      "gender": "male",
       "id": 9
     },
     {
@@ -68,6 +77,7 @@
       "country": "Moldova",
       "number": "123456789",
       "email": "nicu.plamadeala@gmail.com",
+      "gender": "male",
       "id": 10
     }
   ]

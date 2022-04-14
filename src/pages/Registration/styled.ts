@@ -62,7 +62,19 @@ export const Style = styled.div`
     margin-bottom: 10px;
   }
 
-  .pass {
+  select {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    height: 60px;
+    margin-bottom: 10px;
+    text-indent: 5px;
+    border-radius: 10px;
+    background-color: white;
+  }
+
+  .pass,
+  .confirm-pass {
     display: block;
     position: relative;
   }
@@ -79,6 +91,28 @@ export const Style = styled.div`
   }
 
   .pass:after {
+    content: "";
+    position: absolute;
+    margin-top: 18px;
+    margin-left: 84%;
+    width: 25px;
+    height: 20px;
+    background: url("/eyeoff.svg");
+    cursor: pointer;
+  }
+
+  .confirm-password:after {
+    content: "";
+    position: absolute;
+    margin-top: 18px;
+    margin-left: 37%;
+    width: 25px;
+    height: 20px;
+    background: url("/eye.svg");
+    cursor: pointer;
+  }
+
+  .confirm-pass:after {
     content: "";
     position: absolute;
     margin-top: 18px;
@@ -141,7 +175,7 @@ export const Style = styled.div`
     content: "";
     position: absolute;
     right: 37%;
-    top: 8px;
+    top: 12px;
     bottom: 0;
     width: 50px;
     height: 20px;

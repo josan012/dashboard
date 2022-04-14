@@ -38,6 +38,15 @@ const Add: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
     }
   }
 
+  function onSelectChange(e: ChangeEvent<HTMLSelectElement>) {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+    console.log(user);
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
   return (
     <Style>
       <div className="center">
@@ -73,7 +82,31 @@ const Add: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
                   placeholder="Email address"
                   onChange={(e) => onTextFieldChange(e)}
                 />
-
+                <div className="gender">
+                  <select
+                    id="genderselect"
+                    name="gender"
+                    onChange={(e) => onSelectChange(e)}
+                  >
+                    <option
+                      value="none"
+                      selected
+                      disabled
+                      label="Select Gender"
+                    >
+                      Select Gender
+                    </option>
+                    <option value="male" label="Male">
+                      Male
+                    </option>
+                    <option value="female" label="Female">
+                      Female
+                    </option>
+                    <option value="other" label="Other">
+                      other
+                    </option>
+                  </select>
+                </div>
                 <div className="submit">
                   <Button
                     type="submit"

@@ -3,8 +3,8 @@ import { PieChart, Pie, Tooltip } from "recharts";
 import { Link } from "react-router-dom";
 
 const data = [
-  { name: "Users", number: 2 },
-  { name: "Posts", number: 5 },
+  { name: "Users", number: 3 },
+  { name: "Posts", number: 4 },
 ];
 
 // const postsNumber = fetch("http://localhost:4444/posts")
@@ -12,9 +12,9 @@ const data = [
 //     return response.json();
 //   })
 //   .then((json) => {
-//     console.log(json);
 //     alert("Number of item:" + json.length);
 //   });
+
 const Dashboard = () => {
   return (
     <Style>
