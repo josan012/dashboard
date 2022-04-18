@@ -6,6 +6,7 @@ import CreatePost from "../../components/CreatePost";
 import Button from "@mui/material/Button";
 import Dialog from "../../components/Dialog";
 import { Link } from "react-router-dom";
+import PostTabel from "../../components/PostTabel";
 
 interface Post {
   id: number;
@@ -59,6 +60,8 @@ const Posts: React.FC<Props> = () => {
       setData(data);
     }
   };
+
+  const [switcher, setSwitcher] = useState("card");
   return (
     <Style>
       <div className="panel">
@@ -104,25 +107,41 @@ const Posts: React.FC<Props> = () => {
                 onSuccess={() => getAllPosts()}
               />
             )}
-            <Button onClick={togglePopup}>Add</Button>
-            <div className="grid">
-              <div className="row">
-                {post.map((post, i) => {
-                  return (
-                    <Widget
-                      post={post}
-                      setPostId={setPostId}
-                      onSuccess={() => getAllPosts()}
-                      key={i}
-                      title={post.title}
-                      description={post.description}
-                      date={post.date}
-                      user={post.user}
-                    />
-                  );
-                })}
+            <span>
+              <Button onClick={togglePopup}>Add</Button>
+            </span>
+            <span>
+              <Button onClick={() => setSwitcher("tabel")}>Tabel</Button>
+            </span>
+            <span>
+              <Button onClick={() => setSwitcher("card")}>Card</Button>
+            </span>
+            {switcher === "card" ? (
+              <div className="grid">
+                <div className="row">
+                  {post.map((post, i) => {
+                    return (
+                      <Widget
+                        post={post}
+                        setPostId={setPostId}
+                        onSuccess={() => getAllPosts()}
+                        key={i}
+                        title={post.title}
+                        description={post.description}
+                        date={post.date}
+                        user={post.user}
+                      />
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            ) : (
+              <PostTabel
+                posts={post}
+                onSuccess={() => getAllPosts()}
+                setPostId={setPostId}
+              />
+            )}
             {postId && (
               <div className="confirm">
                 <Dialog

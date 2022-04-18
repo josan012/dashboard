@@ -68,6 +68,8 @@ export const Style = styled.div`
 
   span {
     margin-right: 5px;
+    width: fit-content;
+    display: inline;
   }
 
   a:link {
