@@ -1,8 +1,22 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Style from "./styled";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
+import { useEffect, useState } from "react";
 
 const Sign = () => {
+  const [data, setData] = useState(null);
+  const [print, setPrint] = useState(false);
+
+  function getData(val: any) {
+    console.warn(val.target.value);
+    setData(val.target.value);
+    setPrint(false);
+  }
+
+  useEffect(() => {
+    localStorage.setItem("email", JSON.stringify(data));
+  }, [data]);
   return (
     <Style>
       <div className="center">
@@ -22,6 +36,7 @@ const Sign = () => {
               name="email"
               id="email"
               placeholder="Email address"
+              onChange={getData}
             />
           </div>
           <div className="password">

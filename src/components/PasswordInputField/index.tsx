@@ -27,6 +27,7 @@ const PasswordInputField: React.FC<Props> = ({
     togglePassword();
     handleChangeActive();
   };
+
   return (
     <Style>
       <div className="password-field">

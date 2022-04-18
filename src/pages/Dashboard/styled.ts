@@ -25,7 +25,7 @@ export const Style = styled.div`
   }
 
   Button {
-    width: 100%;
+    width: 100px;
     height: 50px;
     color: #0288d1;
     background-color: #fff;
@@ -41,10 +41,6 @@ export const Style = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-  }
-
-  span {
-    margin-right: 5px;
   }
 
   a:link {
@@ -65,6 +61,18 @@ export const Style = styled.div`
   .dashboard {
     text-align: center;
     height: 30px;
+  }
+
+  .logout {
+    margin-left: 10px;
+  }
+
+  .email {
+    width: 140px;
+  }
+
+  .signup {
+    margin-left: 10px;
   }
 `;
 export default Style;

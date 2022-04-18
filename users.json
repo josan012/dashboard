@@ -79,6 +79,14 @@
       "email": "nicu.plamadeala@gmail.com",
       "gender": "male",
       "id": 10
+    },
+    {
+      "fullname": "Gherjavca Daniel",
+      "country": "Chile",
+      "number": "068194218",
+      "email": "daniel.gherjavca@gmail.com",
+      "gender": "other",
+      "id": 11
     }
   ]
 }

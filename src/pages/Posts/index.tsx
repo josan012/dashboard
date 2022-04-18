@@ -41,6 +41,24 @@ const Posts: React.FC<Props> = () => {
       console.log("Something is wrong");
     }
   }
+
+  const [print, setPrint] = useState(false);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("email") || "{}");
+    if (data) {
+      setData(data);
+      setPrint(true);
+    }
+  }, []);
+
+  const clear = () => {
+    const data = localStorage.setItem("email", JSON.stringify(null));
+    if (data === null) {
+      setData(data);
+    }
+  };
   return (
     <Style>
       <div className="panel">
@@ -57,14 +75,27 @@ const Posts: React.FC<Props> = () => {
         </div>
         <div className="left">
           <div className="corner">
-            <div className="sign">
-              <span>
-                <Link to="/sign">Sign In</Link>
-              </span>
-              <span>
-                <Link to="/registration">Sign Up</Link>
-              </span>
-            </div>
+            {print ? (
+              <div>
+                <span>{data}</span>
+                <span>
+                  <Button onClick={clear}>
+                    <Link to="/sign" className="logout">
+                      Log Out
+                    </Link>
+                  </Button>
+                </span>
+              </div>
+            ) : (
+              <div className="sign">
+                <span>
+                  <Link to="/sign">Sign In</Link>
+                </span>
+                <span className="signup">
+                  <Link to="/registration">Sign Up</Link>
+                </span>
+              </div>
+            )}
           </div>
           <div className="center">
             {isOpen && (

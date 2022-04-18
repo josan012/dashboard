@@ -28,23 +28,6 @@ const Registration: React.FC<Props> = ({
     gender: "",
   });
 
-  function onTextFieldChange(e: ChangeEvent<HTMLInputElement>) {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
-    console.log(user);
-    localStorage.setItem("user", JSON.stringify(user));
-  }
-
-  function onSelectChange(e: ChangeEvent<HTMLSelectElement>) {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
-    console.log(user);
-  }
-
   async function onFormSubmit(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
@@ -125,6 +108,44 @@ const Registration: React.FC<Props> = ({
     }
   };
 
+  const [fullname, setFullname] = useState(false);
+  function inputHandlerFullname(e: ChangeEvent<HTMLInputElement>) {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    setFullname(Boolean(e.target.value));
+  }
+
+  const [country, setCountry] = useState(false);
+  function inputHandlerCountry(e: ChangeEvent<HTMLInputElement>) {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    setCountry(Boolean(e.target.value));
+  }
+
+  const [number, setNumber] = useState(false);
+  function inputHandlerNumber(e: ChangeEvent<HTMLInputElement>) {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    setNumber(Boolean(e.target.value));
+  }
+
+  const [email, setEmail] = useState(false);
+  function inputHandlerEmail(e: ChangeEvent<HTMLInputElement>) {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    setEmail(Boolean(e.target.value));
+  }
+
+  const [gender, setGender] = useState(false);
+  function genderHandler(e: ChangeEvent<HTMLSelectElement>) {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    if (e.target.value !== "none") setGender(Boolean(e.target.value));
+  }
+
+  const [yearsscheck, setAgreeyears] = useState(false);
+  const checkboxHandleryears = (e: ChangeEvent<HTMLInputElement>) => {
+    setAgreeyears(Boolean(e.target.value));
+  };
+  const [thermscheck, setAgreetherms] = useState(false);
+  const checkboxHandlertherms = (e: ChangeEvent<HTMLInputElement>) => {
+    setAgreetherms(Boolean(e.target.value));
+  };
   return (
     <Style>
       <div className="center">
@@ -145,32 +166,32 @@ const Registration: React.FC<Props> = ({
                   type="text"
                   placeholder="Full Name"
                   name="fullname"
-                  onChange={(e) => onTextFieldChange(e)}
+                  onChange={(e) => inputHandlerFullname(e)}
                 />
                 <input
                   type="text"
                   name="country"
                   placeholder="Country"
-                  onChange={(e) => onTextFieldChange(e)}
+                  onChange={(e) => inputHandlerCountry(e)}
                 />
                 <input
                   type="text"
                   name="number"
                   placeholder="Phone Number"
-                  onChange={(e) => onTextFieldChange(e)}
+                  onChange={(e) => inputHandlerNumber(e)}
                 />
                 <input
                   type="email"
                   name="email"
                   id="email"
                   placeholder="Email address"
-                  onChange={(e) => onTextFieldChange(e)}
+                  onChange={(e) => inputHandlerEmail(e)}
                 />
                 <div className="gender">
                   <select
                     id="genderselect"
                     name="gender"
-                    onChange={(e) => onSelectChange(e)}
+                    onChange={(e) => genderHandler(e)}
                   >
                     <option
                       value="none"
@@ -212,13 +233,21 @@ const Registration: React.FC<Props> = ({
                 </div>
                 <div className="check">
                   <label>
-                    <input id="checkid" type="checkbox" />I am 18 years old or
-                    older
+                    <input
+                      id="checkid"
+                      type="checkbox"
+                      onChange={checkboxHandleryears}
+                    />
+                    I am 18 years old or older
                   </label>
                 </div>
                 <div className="check">
                   <label>
-                    <input id="checkid" type="checkbox" />
+                    <input
+                      id="checkid"
+                      type="checkbox"
+                      onChange={checkboxHandlertherms}
+                    />
                     Agree with
                     <span className="terms">
                       <a href="#"> Terms &#38; Condition</a>
@@ -226,7 +255,28 @@ const Registration: React.FC<Props> = ({
                   </label>
                 </div>
                 <div className="submit">
-                  <Button type="submit" onClick={(e) => onFormSubmit(e)}>
+                  <Button
+                    type="submit"
+                    disabled={
+                      !fullname ||
+                      !country ||
+                      !number ||
+                      !email ||
+                      !gender ||
+                      !yearsscheck ||
+                      !thermscheck
+                    }
+                    onClick={(e) => onFormSubmit(e)}
+                  >
+                    {console.log(
+                      !fullname,
+                      !country,
+                      !number,
+                      !email,
+                      !gender,
+                      !yearsscheck,
+                      !thermscheck
+                    )}
                     <Link to="/sign" className="link">
                       Sign Up
                     </Link>

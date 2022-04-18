@@ -89,5 +89,13 @@ export const Style = styled.div`
     text-align: center;
     height: 30px;
   }
+
+  .logout {
+    margin-left: 10px;
+  }
+
+  .signup {
+    margin-left: 10px;
+  }
 `;
 export default Style;

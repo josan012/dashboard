@@ -103,5 +103,13 @@ export const Style = styled.div`
     display: flex;
     margin-left: 30%;
   }
+
+  .logout {
+    margin-left: 10px;
+  }
+
+  .signup {
+    margin-left: 10px;
+  }
 `;
 export default Style;
