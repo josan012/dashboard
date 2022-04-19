@@ -7,38 +7,10 @@ import PostEdit from "./pages/PostEdit";
 import Users from "./pages/Users";
 import Posts from "./pages/Posts";
 import Dashboard from "./pages/Dashboard";
+import { User, Post } from "../src/interfaces";
 
-interface User {
-  id: number;
-  fullname: string;
-  country: string;
-  number: string;
-  email: string;
-  gender: string;
-}
-
-interface Post {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  user: string;
-}
-
-function App() {
-  const [active, setActive] = useState(false);
-  const [confirmActive, setConfirmActive] = useState(false);
-
-  const handleChangeActive = () => {
-    setActive((previousEye) => !previousEye);
-  };
-
-  const handleConfirmChangeActive = () => {
-    setConfirmActive((previousConfirmEye) => !previousConfirmEye);
-  };
-
+export const App: React.FC = () => {
   const [users] = useState<User[]>([]);
-
   const [posts] = useState<Post[]>([]);
 
   return (
@@ -47,17 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/sign" element={<Sign />} />
-          <Route
-            path="/registration"
-            element={
-              <Registration
-                confirmActive={confirmActive}
-                active={active}
-                handleChangeActive={handleChangeActive}
-                handleConfirmChangeActive={handleConfirmChangeActive}
-              />
-            }
-          />
+          <Route path="/registration" element={<Registration />} />
           <Route path="/users/edit/:id" element={<EditPage />} />
           <Route path="/posts/edit/:id" element={<PostEdit />} />
           <Route path="/users" element={<Users user={users} />} />
@@ -67,6 +29,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,14 +1,7 @@
 import Style from "./styled";
 import DeleteIcon from "../../icons/DeleteIcon";
 import { Link } from "react-router-dom";
-
-interface Post {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  user: string;
-}
+import { Post } from "../../interfaces";
 
 interface Props {
   post: Post;

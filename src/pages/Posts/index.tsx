@@ -1,5 +1,4 @@
 import Style from "./styled";
-import Widget from "../../components/Widget";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CreatePost from "../../components/CreatePost";
@@ -7,14 +6,8 @@ import Button from "@mui/material/Button";
 import Dialog from "../../components/Dialog";
 import { Link } from "react-router-dom";
 import PostTabel from "../../components/PostTabel";
-
-interface Post {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  user: string;
-}
+import { Post } from "../../interfaces";
+import PostGrid from "../../components/PostGrid";
 
 interface Props {
   posts: Post[];
@@ -33,7 +26,7 @@ const Posts: React.FC<Props> = () => {
     getAllPosts();
   }, []);
 
-  async function getAllPosts() {
+  const getAllPosts = async () => {
     try {
       const posts = await axios.get("http://localhost:4444/posts");
       console.log(posts.data);
@@ -41,7 +34,7 @@ const Posts: React.FC<Props> = () => {
     } catch (error) {
       console.log("Something is wrong");
     }
-  }
+  };
 
   const [print, setPrint] = useState(false);
   const [data, setData] = useState([]);
@@ -116,25 +109,9 @@ const Posts: React.FC<Props> = () => {
             <span>
               <Button onClick={() => setSwitcher("card")}>Card</Button>
             </span>
+
             {switcher === "card" ? (
-              <div className="grid">
-                <div className="row">
-                  {post.map((post, i) => {
-                    return (
-                      <Widget
-                        post={post}
-                        setPostId={setPostId}
-                        onSuccess={() => getAllPosts()}
-                        key={i}
-                        title={post.title}
-                        description={post.description}
-                        date={post.date}
-                        user={post.user}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
+              <PostGrid />
             ) : (
               <PostTabel
                 posts={post}

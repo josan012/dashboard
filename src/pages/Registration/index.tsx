@@ -7,19 +7,7 @@ import Button from "@mui/material/Button";
 import PasswordInputField from "../../components/PasswordInputField";
 import ConfirmPasswordInputField from "../../components/ConfirmPasswordInputField";
 
-interface Props {
-  active: boolean;
-  confirmActive: boolean;
-  handleChangeActive: () => void;
-  handleConfirmChangeActive: () => void;
-}
-
-const Registration: React.FC<Props> = ({
-  active,
-  confirmActive,
-  handleChangeActive,
-  handleConfirmChangeActive,
-}) => {
+const Registration: React.FC = () => {
   const [user, setUser] = useState({
     fullname: "",
     country: "",
@@ -109,34 +97,49 @@ const Registration: React.FC<Props> = ({
   };
 
   const [fullname, setFullname] = useState(false);
-  function inputHandlerFullname(e: ChangeEvent<HTMLInputElement>) {
-    setUser({ ...user, [e.target.name]: e.target.value });
+  const inputHandlerFullname = (e: ChangeEvent<HTMLInputElement>) => {
+    setUser((preventState) => ({
+      ...preventState,
+      [e.target.name]: e.target.value,
+    }));
     setFullname(Boolean(e.target.value));
-  }
+  };
 
   const [country, setCountry] = useState(false);
-  function inputHandlerCountry(e: ChangeEvent<HTMLInputElement>) {
-    setUser({ ...user, [e.target.name]: e.target.value });
+  const inputHandlerCountry = (e: ChangeEvent<HTMLInputElement>) => {
+    setUser((preventState) => ({
+      ...preventState,
+      [e.target.name]: e.target.value,
+    }));
     setCountry(Boolean(e.target.value));
-  }
+  };
 
   const [number, setNumber] = useState(false);
-  function inputHandlerNumber(e: ChangeEvent<HTMLInputElement>) {
-    setUser({ ...user, [e.target.name]: e.target.value });
+  const inputHandlerNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    setUser((preventState) => ({
+      ...preventState,
+      [e.target.name]: e.target.value,
+    }));
     setNumber(Boolean(e.target.value));
-  }
+  };
 
   const [email, setEmail] = useState(false);
-  function inputHandlerEmail(e: ChangeEvent<HTMLInputElement>) {
-    setUser({ ...user, [e.target.name]: e.target.value });
+  const inputHandlerEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setUser((preventState) => ({
+      ...preventState,
+      [e.target.name]: e.target.value,
+    }));
     setEmail(Boolean(e.target.value));
-  }
+  };
 
   const [gender, setGender] = useState(false);
-  function genderHandler(e: ChangeEvent<HTMLSelectElement>) {
-    setUser({ ...user, [e.target.name]: e.target.value });
+  const genderHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    setUser((preventState) => ({
+      ...preventState,
+      [e.target.name]: e.target.value,
+    }));
     if (e.target.value !== "none") setGender(Boolean(e.target.value));
-  }
+  };
 
   const [yearsscheck, setAgreeyears] = useState(false);
   const checkboxHandleryears = (e: ChangeEvent<HTMLInputElement>) => {
@@ -146,6 +149,18 @@ const Registration: React.FC<Props> = ({
   const checkboxHandlertherms = (e: ChangeEvent<HTMLInputElement>) => {
     setAgreetherms(Boolean(e.target.value));
   };
+
+  const [active, setActive] = useState(false);
+  const [confirmActive, setConfirmActive] = useState(false);
+
+  const handleChangeActive = () => {
+    setActive((previousEye) => !previousEye);
+  };
+
+  const handleConfirmChangeActive = () => {
+    setConfirmActive((previousConfirmEye) => !previousConfirmEye);
+  };
+
   return (
     <Style>
       <div className="center">

@@ -3,14 +3,9 @@ import Style from "./styled";
 import EditIcon from "../../icons/EditIcon";
 import DeleteIcon from "../../icons/DeleteIcon";
 import { Link } from "react-router-dom";
-
-interface Post {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  user: string;
-}
+import { Post } from "../../interfaces";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface Props {
   posts: Post[];
@@ -18,10 +13,27 @@ interface Props {
   setPostId: (postId: number) => void;
 }
 
-const PostTabel: React.FC<Props> = ({ posts, onSuccess, setPostId }) => {
+const PostTabel: React.FC<Props> = ({ setPostId }) => {
+  const [query, setQuery] = useState("");
+  const [data, setData] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(`http://localhost:4444/posts?q=${query}`);
+      setData(res.data);
+    };
+    if (query.length === 0 || query.length > 2) fetchData();
+  }, [query]);
+
   return (
     <Style>
       <div className="center">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="search"
+          onChange={(e) => setQuery(e.target.value.toLowerCase())}
+        />
         <table>
           <thead>
             <th>ID</th>
@@ -31,7 +43,7 @@ const PostTabel: React.FC<Props> = ({ posts, onSuccess, setPostId }) => {
             <th>User</th>
             <th>Action</th>
           </thead>
-          {posts.map((post, i) => {
+          {data.map((post, i) => {
             return (
               <tbody>
                 <tr key={i}>

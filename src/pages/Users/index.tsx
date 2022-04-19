@@ -7,15 +7,7 @@ import Add from "../../components/Add";
 import Table from "../../components/Table";
 import { Link } from "react-router-dom";
 import DialogUsers from "../../components/DialogUsers";
-
-interface User {
-  id: number;
-  fullname: string;
-  country: string;
-  number: string;
-  email: string;
-  gender: string;
-}
+import { User } from "../../interfaces";
 
 interface Props {
   user: User[];
@@ -35,7 +27,7 @@ const Users: React.FC<Props> = ({ user }) => {
     setIsOpen(!isOpen);
   };
 
-  async function getAllUsers() {
+  const getAllUsers = async () => {
     try {
       const users = await axios.get("http://localhost:3333/users");
       console.log(users.data);
@@ -43,7 +35,7 @@ const Users: React.FC<Props> = ({ user }) => {
     } catch (error) {
       console.log("Something is wrong");
     }
-  }
+  };
 
   const [print, setPrint] = useState(false);
   const [data, setData] = useState([]);

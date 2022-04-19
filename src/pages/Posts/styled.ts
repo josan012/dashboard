@@ -99,5 +99,10 @@ export const Style = styled.div`
   .signup {
     margin-left: 10px;
   }
+
+  input {
+    width: 200px;
+    margin: 10px;
+  }
 `;
 export default Style;
