@@ -128,5 +128,11 @@ export const Style = styled.div`
   .link:hover {
     color: #2196f3;
   }
+  .error {
+    color: red;
+    display: block;
+    width: 80%;
+    margin: 0 auto 10px auto;
+  }
 `;
 export default Style;

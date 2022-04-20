@@ -11,6 +11,10 @@ interface errorMessages {
   message: string;
 }
 
+// pentru a ne conecta folosim contul
+// email:    vlad.popovschii@gmail.com
+// parola:   abcd1234A@
+
 const Sign: React.FC = () => {
   const [data, setData] = useState(null);
   const [print, setPrint] = useState(false);
@@ -29,14 +33,14 @@ const Sign: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const errors = {
-    email: "invalid username",
+    email: "invalid email",
     password: "invalid password",
   };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    var { email, password } = document.forms[0];
+    let { email, password } = document.forms[0];
 
     // Find user login info
     const userData = users.users.find(
@@ -61,6 +65,7 @@ const Sign: React.FC = () => {
     name === errorMessages?.name && (
       <div className="error">{errorMessages?.message}</div>
     );
+  console.log(errorMessages?.message);
 
   return (
     <Style>
@@ -106,11 +111,7 @@ const Sign: React.FC = () => {
                 </span>
               </div>
               <div className="submit">
-                <Button type="submit">
-                  {/* <Link to="/" className="link"> */}
-                  Sign In
-                  {/* </Link> */}
-                </Button>
+                <Button type="submit">Sign In</Button>
               </div>
             </form>
           </div>
