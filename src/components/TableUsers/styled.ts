@@ -20,5 +20,10 @@ export const Style = styled.div`
     width: 200px;
     margin: 10px;
   }
+
+  .pages {
+    display: flex;
+    justify-content: center;
+  }
 `;
 export default Style;

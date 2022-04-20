@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Add from "../../components/Add";
-import Table from "../../components/Table";
+import TableUsers from "../../components/TableUsers";
 import { Link } from "react-router-dom";
 import DialogUsers from "../../components/DialogUsers";
 import { User } from "../../interfaces";
@@ -97,7 +97,7 @@ const Users: React.FC<Props> = ({ user }) => {
               <Add setIsOpen={setIsOpen} onSuccess={() => getAllUsers()} />
             )}
             <Button onClick={togglePopup}>Add</Button>
-            <Table
+            <TableUsers
               user={users}
               onSuccess={() => getAllUsers()}
               setUserId={setUserId}

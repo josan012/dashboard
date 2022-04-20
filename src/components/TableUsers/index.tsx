@@ -1,9 +1,9 @@
-import { IconButton } from "@mui/material";
 import Style from "./styled";
+import { Link } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
 import EditIcon from "../../icons/EditIcon";
 import DeleteIcon from "../../icons/DeleteIcon";
-import { Link } from "react-router-dom";
-import { Post } from "../../interfaces";
+import { User } from "../../interfaces";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Table from "@material-ui/core/Table";
@@ -16,18 +16,18 @@ import TablePagination from "@mui/material/TablePagination";
 import Paper from "@material-ui/core/Paper";
 
 interface Props {
-  posts: Post[];
+  user: User[];
   onSuccess: () => void;
-  setPostId: (postId: number) => void;
+  setUserId: (postId: number) => void;
 }
 
-const PostTabel: React.FC<Props> = ({ setPostId }) => {
+const TableUsers: React.FC<Props> = ({ user, setUserId }) => {
   const [query, setQuery] = useState("");
-  const [data, setData] = useState<Post[]>([]);
+  const [data, setData] = useState<User[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`http://localhost:4444/posts?q=${query}`);
+      const res = await axios.get(`http://localhost:3333/users?q=${query}`);
       setData(res.data);
     };
     if (query.length === 0 || query.length > 2) fetchData();
@@ -56,37 +56,39 @@ const PostTabel: React.FC<Props> = ({ setPostId }) => {
           onChange={(e) => setQuery(e.target.value.toLowerCase())}
         />
         <TableContainer component={Paper}>
-          <Table aria-label="posts table">
+          <Table aria-label="users table">
             <TableHead>
               <TableCell align="center">ID</TableCell>
-              <TableCell align="center">Title</TableCell>
-              <TableCell align="center">Description</TableCell>
-              <TableCell align="center">Date</TableCell>
-              <TableCell align="center">User</TableCell>
+              <TableCell align="center">Full Name</TableCell>
+              <TableCell align="center">Country</TableCell>
+              <TableCell align="center">Number</TableCell>
+              <TableCell align="center">Email</TableCell>
+              <TableCell align="center">Gender</TableCell>
               <TableCell align="center">Action</TableCell>
             </TableHead>
             {data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((post, i) => {
+              .map((user, i) => {
                 return (
                   <TableBody>
                     <TableRow key={i}>
-                      <TableCell align="center">{post.id}</TableCell>
-                      <TableCell align="center">{post.title}</TableCell>
-                      <TableCell align="center">{post.description}</TableCell>
-                      <TableCell align="center">{post.date}</TableCell>
-                      <TableCell align="center">{post.user}</TableCell>
-                      <TableCell align="center" className="icon">
+                      <TableCell align="center">{user.id}</TableCell>
+                      <TableCell align="center">{user.fullname}</TableCell>
+                      <TableCell align="center">{user.country}</TableCell>
+                      <TableCell align="center">{user.number}</TableCell>
+                      <TableCell align="center">{user.email}</TableCell>
+                      <TableCell align="center">{user.gender}</TableCell>
+                      <TableCell className="icon">
                         <div className="grid">
                           <IconButton className="icon" aria-label="Edit">
-                            <Link to={`/posts/edit/${post.id}`}>
+                            <Link to={`/users/edit/${user.id}`}>
                               <EditIcon />
                             </Link>
                           </IconButton>
                           <IconButton
                             className="icon"
                             aria-label="Delete"
-                            onClick={() => setPostId(post.id)}
+                            onClick={() => setUserId(user.id)}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -116,4 +118,4 @@ const PostTabel: React.FC<Props> = ({ setPostId }) => {
     </Style>
   );
 };
-export default PostTabel;
+export default TableUsers;
