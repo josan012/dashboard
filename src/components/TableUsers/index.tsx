@@ -43,9 +43,6 @@ const TableUsers: React.FC<Props> = ({ user, setUserId }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
-
   return (
     <Style>
       <div className="center">
@@ -98,11 +95,6 @@ const TableUsers: React.FC<Props> = ({ user, setUserId }) => {
                   </TableBody>
                 );
               })}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
           </Table>
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}

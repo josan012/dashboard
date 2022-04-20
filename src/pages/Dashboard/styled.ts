@@ -68,7 +68,7 @@ export const Style = styled.div`
   }
 
   .email {
-    width: 140px;
+    width: fit-content;
   }
 
   .signup {

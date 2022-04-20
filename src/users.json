@@ -399,6 +399,26 @@
       "email": "nicu.plamadeala@gmail.com",
       "gender": "male",
       "id": 50
+    },
+    {
+      "fullname": "Popovschii Vlad",
+      "country": "Moldova",
+      "number": "068383421",
+      "email": "vlad.popovschii@gmail.com",
+      "gender": "male",
+      "password": "abcd1234A@",
+      "confirmPassword": "abcd1234A@",
+      "id": 51
+    },
+    {
+      "fullname": "Duca Dumitra",
+      "country": "Belgia",
+      "number": "068329831",
+      "email": "duca.dumitra@gmail.com",
+      "gender": "female",
+      "password": "123!A123a",
+      "confirmPassword": "123!A123a",
+      "id": 52
     }
   ]
 }

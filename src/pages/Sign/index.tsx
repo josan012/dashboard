@@ -3,8 +3,15 @@ import Style from "./styled";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
+import users from "../../users.json";
+import Dashboard from "../Dashboard";
 
-const Sign = () => {
+interface errorMessages {
+  name: string;
+  message: string;
+}
+
+const Sign: React.FC = () => {
   const [data, setData] = useState(null);
   const [print, setPrint] = useState(false);
 
@@ -17,49 +24,97 @@ const Sign = () => {
   useEffect(() => {
     localStorage.setItem("email", JSON.stringify(data));
   }, [data]);
+
+  const [errorMessages, setErrorMessages] = useState<errorMessages>();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const errors = {
+    email: "invalid username",
+    password: "invalid password",
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+
+    var { email, password } = document.forms[0];
+
+    // Find user login info
+    const userData = users.users.find(
+      (user: any) => user.email === email.value
+    );
+
+    // Compare user info
+    if (userData) {
+      if (userData.password !== password.value) {
+        // Invalid password
+        setErrorMessages({ name: "password", message: errors.password });
+      } else {
+        setIsSubmitted(true);
+      }
+    } else {
+      // Username not found
+      setErrorMessages({ name: "email", message: errors.email });
+    }
+  };
+
+  const renderErrorMessage = (name: any) =>
+    name === errorMessages?.name && (
+      <div className="error">{errorMessages?.message}</div>
+    );
+
   return (
     <Style>
       <div className="center">
-        <div className="form">
-          <div className="title">
-            <p className="signin">Sign In</p>
-            <p className="already">
-              Do not have an account?
-              <span className="sign-up">
-                <Link to="/registration">Sign Up</Link>
-              </span>
-            </p>
+        {isSubmitted ? (
+          <Dashboard />
+        ) : (
+          <div className="form">
+            <div className="title">
+              <p className="signin">Sign In</p>
+              <p className="already">
+                Do not have an account?
+                <span className="sign-up">
+                  <Link to="/registration">Sign Up</Link>
+                </span>
+              </p>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="email">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email address"
+                  onChange={getData}
+                  required
+                />
+              </div>
+              {renderErrorMessage("email")}
+              <div className="password">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              {renderErrorMessage("password")}
+              <div className="forgot">
+                <span>
+                  <a href="#">Forgot Password?</a>
+                </span>
+              </div>
+              <div className="submit">
+                <Button type="submit">
+                  {/* <Link to="/" className="link"> */}
+                  Sign In
+                  {/* </Link> */}
+                </Button>
+              </div>
+            </form>
           </div>
-          <div className="email">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email address"
-              onChange={getData}
-            />
-          </div>
-          <div className="password">
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-            />
-          </div>
-          <div className="forgot">
-            <span>
-              <a href="#">Forgot Password?</a>
-            </span>
-          </div>
-          <div className="submit">
-            <Button>
-              <Link to="/" className="link">
-                Sign In
-              </Link>
-            </Button>
-          </div>
-        </div>
+        )}
       </div>
     </Style>
   );

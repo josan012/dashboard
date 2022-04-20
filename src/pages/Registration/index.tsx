@@ -14,6 +14,7 @@ const Registration: React.FC = () => {
     number: "",
     email: "",
     gender: "",
+    password: "",
   });
 
   async function onFormSubmit(
@@ -56,7 +57,7 @@ const Registration: React.FC = () => {
       const uppercaseRegExp = /(?=.*?[A-Z])/;
       const lowercaseRegExp = /(?=.*?[a-z])/;
       const digitsRegExp = /(?=.*?[0-9])/;
-      const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/;
+      const specialCharRegExp = /(?=.*?[#?!@$%^&*+-])/;
       const minLengthRegExp = /.{8,}/;
       const passwordLength = passwordInputValue.length;
       const uppercasePassword = uppercaseRegExp.test(passwordInputValue);
@@ -94,8 +95,13 @@ const Registration: React.FC = () => {
         setConfirmPasswordError("");
       }
     }
-  };
 
+    setUser((preventState) => ({
+      ...preventState,
+      [event.target.name]: event.target.value,
+    }));
+  };
+  console.log(user);
   const [fullname, setFullname] = useState(false);
   const inputHandlerFullname = (e: ChangeEvent<HTMLInputElement>) => {
     setUser((preventState) => ({
