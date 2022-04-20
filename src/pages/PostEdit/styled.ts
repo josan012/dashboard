@@ -38,7 +38,8 @@ export const Style = styled.div`
   }
 
   input[type="text"],
-  input[type="email"] {
+  input[type="email"],
+  input[type="date"] {
     display: block;
     margin: 0 auto;
     width: 80%;

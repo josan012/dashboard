@@ -25,7 +25,7 @@ export const Style = styled.div`
   }
 
   Button {
-    width: 100%;
+    width: 100px;
     height: 50px;
     color: #0288d1;
     background-color: #fff;
@@ -43,10 +43,6 @@ export const Style = styled.div`
     right: 0;
   }
 
-  span {
-    margin-right: 5px;
-  }
-
   a:link {
     color: #2196f3;
     text-decoration: none;
@@ -58,6 +54,25 @@ export const Style = styled.div`
 
   a:active {
     color: #2196f3;
+  }
+
+  .posts,
+  .users,
+  .dashboard {
+    text-align: center;
+    height: 30px;
+  }
+
+  .logout {
+    margin-left: 10px;
+  }
+
+  .email {
+    width: fit-content;
+  }
+
+  .signup {
+    margin-left: 10px;
   }
 `;
 export default Style;

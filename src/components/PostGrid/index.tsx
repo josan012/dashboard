@@ -1,37 +1,18 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Style from "./styled";
 import Widget from "../Widget";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Post } from "../../interfaces";
 import axios from "axios";
-import CreatePost from "../CreatePost";
-import Button from "@mui/material/Button";
-import Dialog from "../Dialog";
 
-interface Post {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  user: string;
-}
-
-interface Props {
-  posts: Post[];
-}
-
-const Posts: React.FC<Props> = () => {
+const PostGrid = () => {
   const [post, setPosts] = useState<Post[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
   const [postId, setPostId] = useState<number | null>(null);
-
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
-
   useEffect(() => {
     getAllPosts();
   }, []);
 
-  async function getAllPosts() {
+  const getAllPosts = async () => {
     try {
       const posts = await axios.get("http://localhost:4444/posts");
       console.log(posts.data);
@@ -39,17 +20,30 @@ const Posts: React.FC<Props> = () => {
     } catch (error) {
       console.log("Something is wrong");
     }
-  }
+  };
+  const [query, setQuery] = useState("");
+
+  const [content, setContent] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(`http://localhost:4444/posts?q=${query}`);
+      setContent(res.data);
+    };
+    if (query.length === 0 || query.length > 2) fetchData();
+  }, [query]);
   return (
     <Style>
       <div className="center">
-        {isOpen && (
-          <CreatePost setIsOpen={setIsOpen} onSuccess={() => getAllPosts()} />
-        )}
-        <Button onClick={togglePopup}>Add</Button>
+        <input
+          type="text"
+          placeholder="Search..."
+          className="search"
+          onChange={(e) => setQuery(e.target.value.toLowerCase())}
+        />
         <div className="grid">
           <div className="row">
-            {post.map((post, i) => {
+            {content.map((post, i) => {
               return (
                 <Widget
                   post={post}
@@ -65,18 +59,8 @@ const Posts: React.FC<Props> = () => {
             })}
           </div>
         </div>
-        {postId && (
-          <div className="confirm">
-            <Dialog
-              setPostId={(val) => setPostId(val === null ? val : postId)}
-              postId={postId}
-              post={post}
-              onSuccess={() => getAllPosts()}
-            />
-          </div>
-        )}
       </div>
     </Style>
   );
 };
-export default Posts;
+export default PostGrid;

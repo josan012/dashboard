@@ -1,16 +1,7 @@
 import Style from "./styled";
 import DeleteIcon from "../../icons/DeleteIcon";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
-
-interface Post {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  user: string;
-}
+import { Post } from "../../interfaces";
 
 interface Props {
   post: Post;
@@ -39,7 +30,7 @@ const Widget: React.FC<Props> = ({
         <span className="util">{user}</span>
         <div className="actions">
           <span className="edit">
-            <Link to={`post/edit/${post.id}`}>Editare</Link>
+            <Link to={`/posts/edit/${post.id}`}>Editare</Link>
           </span>
           <span className="delete" onClick={() => setPostId(post.id)}>
             Stergere <DeleteIcon />

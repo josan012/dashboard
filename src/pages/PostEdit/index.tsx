@@ -39,6 +39,12 @@ const PostEdit = () => {
     }
   }
 
+  const [date, setDate] = useState(false);
+  function inputHandlerDate(e: ChangeEvent<HTMLInputElement>) {
+    setPost({ ...post, [e.target.name]: e.target.value });
+    setDate(Boolean(e.target.value));
+  }
+
   function onTextFieldChange(e: ChangeEvent<HTMLInputElement>) {
     setPost({
       ...post,
@@ -79,13 +85,7 @@ const PostEdit = () => {
                   value={post.description}
                   onChange={(event) => onTextAreaChange(event)}
                 ></textarea>
-                <input
-                  type="text"
-                  name="date"
-                  placeholder="Phone date"
-                  value={post.date}
-                  onChange={(e) => onTextFieldChange(e)}
-                />
+                <input type="date" name="date" onChange={inputHandlerDate} />
                 <input
                   type="text"
                   name="user"

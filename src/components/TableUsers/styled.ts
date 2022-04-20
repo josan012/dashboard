@@ -15,5 +15,15 @@ export const Style = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+
+  input {
+    width: 200px;
+    margin: 10px;
+  }
+
+  .pages {
+    display: flex;
+    justify-content: center;
+  }
 `;
 export default Style;
