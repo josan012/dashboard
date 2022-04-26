@@ -73,14 +73,6 @@
       "id": 9
     },
     {
-      "fullname": "Plamadeala Nicolae",
-      "country": "Moldova",
-      "number": "123456789",
-      "email": "nicu.plamadeala@gmail.com",
-      "gender": "male",
-      "id": 10
-    },
-    {
       "id": 11,
       "fullname": "Josan Mihai",
       "country": "Moldova",
@@ -151,14 +143,6 @@
       "email": "plosnita.dumitru@gmail.com",
       "gender": "male",
       "id": 19
-    },
-    {
-      "fullname": "Plamadeala Nicolae",
-      "country": "Moldova",
-      "number": "123456789",
-      "email": "nicu.plamadeala@gmail.com",
-      "gender": "male",
-      "id": 20
     },
     {
       "id": 21,
@@ -419,6 +403,24 @@
       "password": "123!A123a",
       "confirmPassword": "123!A123a",
       "id": 52
+    },
+    {
+      "fullname": "Gigel Costel",
+      "email": "gigel@gmail.com",
+      "sex": "male",
+      "phone": "37369283102",
+      "password": "123",
+      "confirmpassword": "123",
+      "id": 53
+    },
+    {
+      "fullname": "Gigel Costel",
+      "email": "gigel@gmail.com",
+      "sex": "male",
+      "phone": "37369283102",
+      "password": "123",
+      "confirmpassword": "123",
+      "id": 54
     }
   ]
 }

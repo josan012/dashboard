@@ -1,0 +1,14 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ebs-button__wrapper,
+.ebs-button--medium.submit {
+  width: 100%;
+  height: fit-content;
+  color: #0288d1;
+  background-color: #fff;
+  text-align: center;
+}

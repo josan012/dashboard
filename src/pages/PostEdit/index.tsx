@@ -85,7 +85,12 @@ const PostEdit = () => {
                   value={post.description}
                   onChange={(event) => onTextAreaChange(event)}
                 ></textarea>
-                <input type="date" name="date" onChange={inputHandlerDate} />
+                <input
+                  type="date"
+                  name="date"
+                  onChange={inputHandlerDate}
+                  value={post.date}
+                />
                 <input
                   type="text"
                   name="user"

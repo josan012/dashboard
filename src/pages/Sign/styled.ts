@@ -4,11 +4,12 @@ export const Style = styled.div`
   .center {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   .form {
     width: 500px;
-    height: auto;
+    height: fit-content;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

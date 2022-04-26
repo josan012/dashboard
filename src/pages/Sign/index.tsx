@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import users from "../../users.json";
 import Dashboard from "../Dashboard";
+import PanelDashboard from "../PanelDashboard";
 
 interface errorMessages {
   name: string;
@@ -69,10 +70,10 @@ const Sign: React.FC = () => {
 
   return (
     <Style>
-      <div className="center">
-        {isSubmitted ? (
-          <Dashboard />
-        ) : (
+      {isSubmitted ? (
+        <PanelDashboard />
+      ) : (
+        <div className="center">
           <div className="form">
             <div className="title">
               <p className="signin">Sign In</p>
@@ -115,8 +116,8 @@ const Sign: React.FC = () => {
               </div>
             </form>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </Style>
   );
 };

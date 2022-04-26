@@ -1,9 +1,9 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import Style from "./styled";
 import Widget from "../Widget";
 import { useEffect, useState } from "react";
 import { Post } from "../../interfaces";
 import axios from "axios";
+import Dialog from "../Dialog";
 
 const PostGrid = () => {
   const [post, setPosts] = useState<Post[]>([]);
@@ -60,6 +60,16 @@ const PostGrid = () => {
           </div>
         </div>
       </div>
+      {postId && (
+        <div className="confirm">
+          <Dialog
+            setPostId={(val) => setPostId(val === null ? val : postId)}
+            postId={postId}
+            post={post}
+            onSuccess={() => getAllPosts()}
+          />
+        </div>
+      )}
     </Style>
   );
 };

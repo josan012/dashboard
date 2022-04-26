@@ -1,13 +1,12 @@
 import React from "react";
-import Style from "./styled";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Button from "@mui/material/Button";
+import { Button } from "ebs-design";
 import Add from "../../components/Add";
 import TableUsers from "../../components/TableUsers";
-import { Link } from "react-router-dom";
 import DialogUsers from "../../components/DialogUsers";
 import { User } from "../../interfaces";
+import "./style.scss";
 
 interface Props {
   user: User[];
@@ -55,67 +54,25 @@ const Users: React.FC<Props> = ({ user }) => {
     }
   };
   return (
-    <Style>
-      <div className="panel">
-        <div className="right">
-          <div className="users">
-            <Link to="/users">Users</Link>
-          </div>
-          <div className="posts">
-            <Link to="/posts">Posts</Link>
-          </div>
-          <div className="dashboard">
-            <Link to="/dashboard">Dashboard</Link>
-          </div>
+    <div className="center">
+      {isOpen && <Add setIsOpen={setIsOpen} onSuccess={() => getAllUsers()} />}
+      <Button onClick={togglePopup}>Add</Button>
+      <TableUsers
+        user={users}
+        onSuccess={() => getAllUsers()}
+        setUserId={setUserId}
+      />
+      {userId && (
+        <div className="confirm">
+          <DialogUsers
+            setUserId={(val) => setUserId(val === null ? val : userId)}
+            userId={userId}
+            user={user}
+            onSuccess={() => getAllUsers()}
+          />
         </div>
-        <div className="left">
-          <div className="corner">
-            {print ? (
-              <div>
-                <span>{data}</span>
-                <span>
-                  <Button onClick={clear}>
-                    <Link to="/sign" className="logout">
-                      Log Out
-                    </Link>
-                  </Button>
-                </span>
-              </div>
-            ) : (
-              <div className="sign">
-                <span>
-                  <Link to="/sign">Sign In</Link>
-                </span>
-                <span className="signup">
-                  <Link to="/registration">Sign Up</Link>
-                </span>
-              </div>
-            )}
-          </div>
-          <div className="center">
-            {isOpen && (
-              <Add setIsOpen={setIsOpen} onSuccess={() => getAllUsers()} />
-            )}
-            <Button onClick={togglePopup}>Add</Button>
-            <TableUsers
-              user={users}
-              onSuccess={() => getAllUsers()}
-              setUserId={setUserId}
-            />
-            {userId && (
-              <div className="confirm">
-                <DialogUsers
-                  setUserId={(val) => setUserId(val === null ? val : userId)}
-                  userId={userId}
-                  user={user}
-                  onSuccess={() => getAllUsers()}
-                />
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </Style>
+      )}
+    </div>
   );
 };
 export default Users;

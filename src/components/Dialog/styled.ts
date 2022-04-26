@@ -5,12 +5,13 @@ export const Style = styled.div`
     display: flex;
     justify-content: center;
     margin: 0 auto;
+    align-items: center;
   }
 
   .dialog {
     background-color: white;
     width: 250px;
-    height: 250px;
+    height: 300px;
     border: 2px solid black;
     border-radius: 15px;
     z-index: 2;

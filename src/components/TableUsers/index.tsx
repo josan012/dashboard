@@ -1,24 +1,17 @@
 import Style from "./styled";
 import { Link } from "react-router-dom";
-import IconButton from "@mui/material/IconButton";
 import EditIcon from "../../icons/EditIcon";
 import DeleteIcon from "../../icons/DeleteIcon";
 import { User } from "../../interfaces";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TablePagination from "@mui/material/TablePagination";
-import Paper from "@material-ui/core/Paper";
+import { Table } from "ebs-design";
+import Pagination from "../Pagination";
 
 interface Props {
   user: User[];
   onSuccess: () => void;
-  setUserId: (postId: number) => void;
+  setUserId: (userId: number) => void;
 }
 
 const TableUsers: React.FC<Props> = ({ user, setUserId }) => {
@@ -43,6 +36,16 @@ const TableUsers: React.FC<Props> = ({ user, setUserId }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  const PageSize = 10;
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return data.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
   return (
     <Style>
       <div className="center">
@@ -52,60 +55,61 @@ const TableUsers: React.FC<Props> = ({ user, setUserId }) => {
           className="search"
           onChange={(e) => setQuery(e.target.value.toLowerCase())}
         />
-        <TableContainer component={Paper}>
-          <Table aria-label="users table">
-            <TableHead>
-              <TableCell align="center">ID</TableCell>
-              <TableCell align="center">Full Name</TableCell>
-              <TableCell align="center">Country</TableCell>
-              <TableCell align="center">Number</TableCell>
-              <TableCell align="center">Email</TableCell>
-              <TableCell align="center">Gender</TableCell>
-              <TableCell align="center">Action</TableCell>
-            </TableHead>
-            {data
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((user, i) => {
-                return (
-                  <TableBody>
-                    <TableRow key={i}>
-                      <TableCell align="center">{user.id}</TableCell>
-                      <TableCell align="center">{user.fullname}</TableCell>
-                      <TableCell align="center">{user.country}</TableCell>
-                      <TableCell align="center">{user.number}</TableCell>
-                      <TableCell align="center">{user.email}</TableCell>
-                      <TableCell align="center">{user.gender}</TableCell>
-                      <TableCell className="icon">
-                        <div className="grid">
-                          <IconButton className="icon" aria-label="Edit">
-                            <Link to={`/users/edit/${user.id}`}>
-                              <EditIcon />
-                            </Link>
-                          </IconButton>
-                          <IconButton
-                            className="icon"
-                            aria-label="Delete"
-                            onClick={() => setUserId(user.id)}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                );
-              })}
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={data.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </TableContainer>
+        <div className="storybook-rows">
+          <div className="storybook-row">
+            <div className="storybook-header"></div>
+            <div className="storybook-row-item">
+              <div className="storybook-label"></div>
+              <Table
+                columns={[
+                  {
+                    dataIndex: "fullname",
+                    title: "fullname",
+                  },
+                  {
+                    dataIndex: "country",
+                    title: "country",
+                  },
+                  {
+                    dataIndex: "number",
+                    title: "number",
+                  },
+                  {
+                    dataIndex: "email",
+                    title: "email",
+                  },
+                  {
+                    dataIndex: "gender",
+                    title: "gender",
+                  },
+                  {
+                    title: "action",
+                    render: (item) => (
+                      <div>
+                        <span>
+                          <Link to={`/users/edit/${item.id}`}>
+                            <EditIcon />
+                          </Link>
+                        </span>
+                        <span onClick={() => setUserId(item.id)}>
+                          <DeleteIcon />
+                        </span>
+                      </div>
+                    ),
+                  },
+                ]}
+                data={data}
+                size="large"
+              />
+            </div>
+          </div>
+        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalCount={data.length}
+          pageSize={PageSize}
+          onPageChange={(page: any) => setCurrentPage(page)}
+        />
       </div>
     </Style>
   );

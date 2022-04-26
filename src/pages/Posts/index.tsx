@@ -57,80 +57,40 @@ const Posts: React.FC<Props> = () => {
   const [switcher, setSwitcher] = useState("card");
   return (
     <Style>
-      <div className="panel">
-        <div className="right">
-          <div className="users">
-            <Link to="/users">Users</Link>
-          </div>
-          <div className="posts">
-            <Link to="/posts">Posts</Link>
-          </div>
-          <div className="dashboard">
-            <Link to="/dashboard">Dashboard</Link>
-          </div>
-        </div>
-        <div className="left">
-          <div className="corner">
-            {print ? (
-              <div>
-                <span>{data}</span>
-                <span>
-                  <Button onClick={clear}>
-                    <Link to="/sign" className="logout">
-                      Log Out
-                    </Link>
-                  </Button>
-                </span>
-              </div>
-            ) : (
-              <div className="sign">
-                <span>
-                  <Link to="/sign">Sign In</Link>
-                </span>
-                <span className="signup">
-                  <Link to="/registration">Sign Up</Link>
-                </span>
-              </div>
-            )}
-          </div>
-          <div className="center">
-            {isOpen && (
-              <CreatePost
-                setIsOpen={setIsOpen}
-                onSuccess={() => getAllPosts()}
-              />
-            )}
-            <span>
-              <Button onClick={togglePopup}>Add</Button>
-            </span>
-            <span>
-              <Button onClick={() => setSwitcher("tabel")}>Tabel</Button>
-            </span>
-            <span>
-              <Button onClick={() => setSwitcher("card")}>Card</Button>
-            </span>
+      <div className="center">
+        {isOpen && (
+          <CreatePost setIsOpen={setIsOpen} onSuccess={() => getAllPosts()} />
+        )}
+        <span>
+          <Button onClick={togglePopup}>Add</Button>
+        </span>
+        <span>
+          <Button onClick={() => setSwitcher("tabel")}>Tabel</Button>
+        </span>
+        <span>
+          <Button onClick={() => setSwitcher("card")}>Card</Button>
+        </span>
 
-            {switcher === "card" ? (
-              <PostGrid />
-            ) : (
-              <PostTabel
-                posts={post}
-                onSuccess={() => getAllPosts()}
-                setPostId={setPostId}
-              />
-            )}
-            {postId && (
-              <div className="confirm">
-                <Dialog
-                  setPostId={(val) => setPostId(val === null ? val : postId)}
-                  postId={postId}
-                  post={post}
-                  onSuccess={() => getAllPosts()}
-                />
-              </div>
-            )}
+        {switcher === "card" ? (
+          <PostGrid />
+        ) : (
+          <PostTabel
+            posts={post}
+            onSuccess={() => getAllPosts()}
+            setPostId={setPostId}
+          />
+        )}
+
+        {postId && (
+          <div className="confirm">
+            <Dialog
+              setPostId={(val) => setPostId(val === null ? val : postId)}
+              postId={postId}
+              post={post}
+              onSuccess={() => getAllPosts()}
+            />
           </div>
-        </div>
+        )}
       </div>
     </Style>
   );

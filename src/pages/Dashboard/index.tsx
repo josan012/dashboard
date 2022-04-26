@@ -64,62 +64,22 @@ const Dashboard = () => {
     }
   };
   return (
-    <Style>
-      <div className="panel">
-        <div className="right">
-          <div className="users">
-            <Link to="/users">Users</Link>
-          </div>
-          <div className="posts">
-            <Link to="/posts">Posts</Link>
-          </div>
-          <div className="dashboard">
-            <Link to="/dashboard">Dashboard</Link>
-          </div>
-        </div>
-        <div className="left">
-          <div className="corner">
-            {print ? (
-              <div className="email">
-                <span>{data}</span>
-                <span>
-                  <Button onClick={clear}>
-                    <Link to="/sign" className="logout">
-                      Log Out
-                    </Link>
-                  </Button>
-                </span>
-              </div>
-            ) : (
-              <div className="sign">
-                <span>
-                  <Link to="/sign">Sign In</Link>
-                </span>
-                <span className="signup">
-                  <Link to="/registration">Sign Up</Link>
-                </span>
-              </div>
-            )}
-          </div>
-          <div className="center">
-            <PieChart width={400} height={400}>
-              <Pie data={chartData} dataKey="number" nameKey="name">
-                {chartData.map((item, index) => (
-                  <Cell
-                    key={index}
-                    stroke={"#000"}
-                    strokeWidth={1}
-                    fill={COLORS[index]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </div>
-        </div>
-      </div>
-    </Style>
+    <div className="center">
+      <PieChart width={400} height={400}>
+        <Pie data={chartData} dataKey="number" nameKey="name">
+          {chartData.map((item, index) => (
+            <Cell
+              key={index}
+              stroke={"#000"}
+              strokeWidth={1}
+              fill={COLORS[index]}
+            />
+          ))}
+        </Pie>
+        <Tooltip />
+        <Legend />
+      </PieChart>
+    </div>
   );
 };
 export default Dashboard;

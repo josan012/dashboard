@@ -21,6 +21,10 @@ const Widget: React.FC<Props> = ({
   post,
   setPostId,
 }) => {
+  const deleteContent = () => {
+    setPostId(post.id);
+    console.log(post.id);
+  };
   return (
     <Style>
       <div className="widget">
@@ -32,9 +36,9 @@ const Widget: React.FC<Props> = ({
           <span className="edit">
             <Link to={`/posts/edit/${post.id}`}>Editare</Link>
           </span>
-          <span className="delete" onClick={() => setPostId(post.id)}>
+          <div className="delete" onClick={deleteContent}>
             Stergere <DeleteIcon />
-          </span>
+          </div>
         </div>
       </div>
     </Style>

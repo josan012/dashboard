@@ -25,5 +25,9 @@ export const Style = styled.div`
     display: flex;
     justify-content: center;
   }
+
+  span {
+    cursor: pointer;
+  }
 `;
 export default Style;
