@@ -1,9 +1,12 @@
 import Style from "./styled";
 import Widget from "../Widget";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Post } from "../../interfaces";
 import axios from "axios";
 import Dialog from "../Dialog";
+import Pagination from "./Pagination";
+
+const PageSize = 4;
 
 const PostGrid = () => {
   const [post, setPosts] = useState<Post[]>([]);
@@ -32,6 +35,15 @@ const PostGrid = () => {
     };
     if (query.length === 0 || query.length > 2) fetchData();
   }, [query]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return post.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, post]);
+
   return (
     <Style>
       <div className="center">

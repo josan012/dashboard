@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../Dashboard";
 import { AvatarInline, Icon, Layout, Sidebar } from "ebs-design";
+import "./style.scss";
 
 const PanelDashboard = () => {
   const history = useNavigate();
@@ -35,7 +36,7 @@ const PanelDashboard = () => {
           />
         </Sidebar.TopMenu>
       </Sidebar>
-      <Layout.Content>
+      <Layout.Content className="center">
         <Dashboard />
       </Layout.Content>
       <Layout.Footer />

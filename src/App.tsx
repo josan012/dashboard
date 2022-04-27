@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import Panel from "./pages/Panel";
 import PanelPosts from "./pages/PanelPosts";
 import PanelDashboard from "./pages/PanelDashboard";
+import Dashboard from "./pages/Dashboard";
 
 export const App: React.FC = () => {
   const [posts] = useState<Post[]>([]);

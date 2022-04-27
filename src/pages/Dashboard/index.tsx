@@ -1,8 +1,17 @@
-import Style from "./styled";
-import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
-import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
+import {
+  PieChart,
+  Pie,
+  Tooltip,
+  Cell,
+  Legend,
+  BarChart,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Bar,
+} from "recharts";
 import { useState, useEffect } from "react";
+import "./style.scss";
 
 const COLORS = ["blue", "green"];
 
@@ -63,6 +72,7 @@ const Dashboard = () => {
       setData(data);
     }
   };
+
   return (
     <div className="center">
       <PieChart width={400} height={400}>

@@ -124,7 +124,7 @@ const Add: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
               <InputPhone country="md" />
             </Form.Field>
             <Button size="medium" type="fill" className="submit" submit={true}>
-              Sign Up
+              Add User
             </Button>
           </Form>
         </div>
