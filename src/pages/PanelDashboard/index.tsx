@@ -1,10 +1,39 @@
 import { useNavigate } from "react-router-dom";
 import Dashboard from "../Dashboard";
-import { AvatarInline, Icon, Layout, Sidebar } from "ebs-design";
+import {
+  AvatarInline,
+  Icon,
+  Layout,
+  Sidebar,
+  Tooltip,
+  Button,
+} from "ebs-design";
 import "./style.scss";
+import axios from "axios";
+import { clearAuthTokens, getAccessToken, getRefreshToken } from "axios-jwt";
+import { useState } from "react";
 
 const PanelDashboard = () => {
   const history = useNavigate();
+  const logout = () => {
+    clearAuthTokens();
+    history("/sign");
+  };
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
+  const [username, setUsername] = useState("");
+
+  const GetData = async () => {
+    let res = await axios.get("http://localhost:3333/users");
+    let data = res.data;
+
+    const userData = data.find((user: any) => user.id === accessToken);
+
+    setUsername(userData.fullname);
+  };
+
+  GetData();
+
   return (
     <Layout>
       <Layout.Topbar>
@@ -13,7 +42,13 @@ const PanelDashboard = () => {
         <Layout.Topbar.Title>Logo</Layout.Topbar.Title>
 
         <Layout.Topbar.RightSide>
-          <AvatarInline alt="Josan Mihai" status="active" reversed />
+          <Tooltip
+            tooltip={<Button onClick={logout}>Log out</Button>}
+            trigger="hover"
+            placement="bottom"
+          >
+            <AvatarInline alt={username} status="active" reversed />
+          </Tooltip>
         </Layout.Topbar.RightSide>
       </Layout.Topbar>
 

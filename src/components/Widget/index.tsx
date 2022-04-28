@@ -9,6 +9,7 @@ interface Props {
   description: string;
   date: string;
   user: string;
+  image: string;
   setPostId: (postId: number) => void;
   onSuccess: () => void;
 }
@@ -18,6 +19,7 @@ const Widget: React.FC<Props> = ({
   description,
   date,
   user,
+  image,
   post,
   setPostId,
 }) => {
@@ -32,6 +34,9 @@ const Widget: React.FC<Props> = ({
         <p>{description}</p>
         <span className="date">{date}</span>
         <span className="util">{user}</span>
+        <div className="image">
+          <img src={image} alt="imagine" />
+        </div>
         <div className="actions">
           <span className="edit">
             <Link to={`/posts/edit/${post.id}`}>Editare</Link>

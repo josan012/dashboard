@@ -13,6 +13,7 @@ interface Post {
   description: string;
   date: string;
   user: string;
+  image: string;
 }
 
 export type { User, Post };

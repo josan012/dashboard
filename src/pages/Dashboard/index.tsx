@@ -1,19 +1,8 @@
-import {
-  PieChart,
-  Pie,
-  Tooltip,
-  Cell,
-  Legend,
-  BarChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Bar,
-} from "recharts";
+import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 import { useState, useEffect } from "react";
 import "./style.scss";
 
-const COLORS = ["blue", "green"];
+const COLORS = ["#3366ff", "#74c043"];
 
 const Dashboard = () => {
   const [chartData, setChartData] = useState([

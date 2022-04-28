@@ -29,6 +29,7 @@ const Add: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
       await axios.post(`http://localhost:3333/users`, data);
       localStorage.setItem("user", JSON.stringify(data));
       setIsOpen(false);
+      onSuccess();
     } catch (error) {
       console.log("Something is Wrong");
     }

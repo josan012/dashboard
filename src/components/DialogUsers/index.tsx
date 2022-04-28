@@ -18,7 +18,7 @@ interface Props {
   onSuccess: () => void;
 }
 
-const Dialog: React.FC<Props> = ({ userId, setUserId, user, onSuccess }) => {
+const Dialog: React.FC<Props> = ({ userId, setUserId, onSuccess }) => {
   const [users, setUsers] = useState<User[]>([]);
   const handleDelete = async (id: number) => {
     await axios
@@ -34,6 +34,7 @@ const Dialog: React.FC<Props> = ({ userId, setUserId, user, onSuccess }) => {
     if (userId !== null) {
       handleDelete(userId);
       setUserId(null);
+      onSuccess();
     }
   };
   console.log(userId, setUserId);

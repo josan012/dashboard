@@ -405,38 +405,20 @@
       "id": 52
     },
     {
-      "fullname": "Josan Mihai",
+      "fullname": "Josan Veronica",
       "country": "Moldova",
-      "email": "mihai.josan12@gmail.com",
-      "gender": "male",
-      "number": "37368383476",
-      "password": "123",
-      "confirmpassword": "123",
-      "id": 53
+      "email": "veronica.josan@gmail.com",
+      "gender": "female",
+      "number": "37368404095",
+      "id": 54
     },
     {
       "fullname": "Josan Vasile",
       "country": "Moldova",
-      "email": "josan.vasile@gmail.com",
+      "email": "vasile.josan@gmail.com",
       "gender": "male",
       "number": "37368290011",
       "id": 55
-    },
-    {
-      "fullname": "Josan Mihaela",
-      "country": "Moldova",
-      "email": "mihaela.josan@gmail.com",
-      "gender": "female",
-      "number": "37368349323",
-      "id": 56
-    },
-    {
-      "fullname": "Josan Veronica",
-      "country": "Moldova",
-      "email": "josan.veronica@gmail.com",
-      "gender": "female",
-      "number": "37368404095",
-      "id": 57
     }
   ]
 }

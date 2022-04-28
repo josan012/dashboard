@@ -1,12 +1,39 @@
-import { AvatarInline, Icon, Layout, Sidebar } from "ebs-design";
+import {
+  AvatarInline,
+  Button,
+  Icon,
+  Layout,
+  Sidebar,
+  Tooltip,
+} from "ebs-design";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../interfaces";
 import Users from "../Users";
+import { clearAuthTokens, getAccessToken, getRefreshToken } from "axios-jwt";
+import axios from "axios";
 
 const Panel = () => {
   const history = useNavigate();
   const [users] = useState<User[]>([]);
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
+  const [username, setUsername] = useState("");
+  const logout = () => {
+    clearAuthTokens();
+    history("/sign");
+  };
+  const GetData = async () => {
+    let res = await axios.get("http://localhost:3333/users");
+    let data = res.data;
+
+    const userData = data.find((user: any) => user.id === accessToken);
+
+    setUsername(userData.fullname);
+  };
+
+  GetData();
+
   return (
     <Layout>
       <Layout.Topbar>
@@ -15,7 +42,13 @@ const Panel = () => {
         <Layout.Topbar.Title>Logo</Layout.Topbar.Title>
 
         <Layout.Topbar.RightSide>
-          <AvatarInline alt="Josan Mihai" status="active" reversed />
+          <Tooltip
+            tooltip={<Button onClick={logout}>Log out</Button>}
+            trigger="hover"
+            placement="bottom"
+          >
+            <AvatarInline alt={username} status="active" reversed />
+          </Tooltip>{" "}
         </Layout.Topbar.RightSide>
       </Layout.Topbar>
 

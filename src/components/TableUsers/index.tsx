@@ -15,15 +15,16 @@ interface Props {
 
 const PageSize = 6;
 
-const TableUsers: React.FC<Props> = ({ user, setUserId }) => {
+const TableUsers: React.FC<Props> = ({ user, setUserId, onSuccess }) => {
   const [query, setQuery] = useState("");
   const [data, setData] = useState<User[]>([]);
-
+  const fetchData = async () => {
+    const res = await axios.get(`http://localhost:3333/users?q=${query}`);
+    setData(res.data);
+    onSuccess();
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get(`http://localhost:3333/users?q=${query}`);
-      setData(res.data);
-    };
+    fetchData();
     if (query.length === 0 || query.length > 2) fetchData();
   }, [query]);
 

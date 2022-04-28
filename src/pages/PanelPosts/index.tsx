@@ -2,8 +2,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Post } from "../../interfaces";
-import { AvatarInline, Icon, Layout, Sidebar } from "ebs-design";
+import {
+  AvatarInline,
+  Button,
+  Icon,
+  Layout,
+  Sidebar,
+  Tooltip,
+} from "ebs-design";
 import Posts from "../Posts";
+import { clearAuthTokens, getAccessToken, getRefreshToken } from "axios-jwt";
 
 interface Props {
   posts: Post[];
@@ -12,21 +20,25 @@ interface Props {
 const PanelPosts: React.FC<Props> = () => {
   const [post, setPosts] = useState<Post[]>([]);
 
-  useEffect(() => {
-    getAllPosts();
-  }, []);
+  const history = useNavigate();
+  const logout = () => {
+    clearAuthTokens();
+    history("/sign");
+  };
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
+  const [username, setUsername] = useState("");
 
-  const getAllPosts = async () => {
-    try {
-      const posts = await axios.get("http://localhost:4444/posts");
-      console.log(posts.data);
-      setPosts(posts.data);
-    } catch (error) {
-      console.log("Something is wrong");
-    }
+  const GetData = async () => {
+    let res = await axios.get("http://localhost:3333/users");
+    let data = res.data;
+
+    const userData = data.find((user: any) => user.id === accessToken);
+
+    setUsername(userData.fullname);
   };
 
-  const history = useNavigate();
+  GetData();
 
   return (
     <Layout>
@@ -36,7 +48,13 @@ const PanelPosts: React.FC<Props> = () => {
         <Layout.Topbar.Title>Logo</Layout.Topbar.Title>
 
         <Layout.Topbar.RightSide>
-          <AvatarInline alt="Josan Mihai" status="active" reversed />
+          <Tooltip
+            tooltip={<Button onClick={logout}>Log out</Button>}
+            trigger="hover"
+            placement="bottom"
+          >
+            <AvatarInline alt={username} status="active" reversed />
+          </Tooltip>{" "}
         </Layout.Topbar.RightSide>
       </Layout.Topbar>
 

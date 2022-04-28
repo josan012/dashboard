@@ -53,5 +53,12 @@ export const Style = styled.div`
   .edit:hover {
     cursor: pointer;
   }
+
+  .image,
+  img {
+    width: 180px;
+    height: 100px;
+    margin: 0 auto;
+  }
 `;
 export default Style;

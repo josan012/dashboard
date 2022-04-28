@@ -142,7 +142,7 @@ const SignUp: React.FC = () => {
                 },
               ]}
             >
-              <Input size="small" />
+              <Input size="small" className="field" />
             </Form.Field>
             <Form.Field
               label="Country:"
@@ -153,7 +153,7 @@ const SignUp: React.FC = () => {
                 },
               ]}
             >
-              <Input size="small" />
+              <Input size="small" className="field" />
             </Form.Field>
             <Form.Field
               extra="This field is required"
@@ -165,7 +165,7 @@ const SignUp: React.FC = () => {
                 },
               ]}
             >
-              <Input type="email" />
+              <Input type="email" className="field" />
             </Form.Field>
 
             <Form.Field
@@ -236,6 +236,28 @@ const SignUp: React.FC = () => {
               // confirmPasswordValue={passwordInput.confirmPassword}
               // confirmPasswordError={confirmPasswordError}
               />
+            </Form.Field>
+            <Form.Field
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+              extra="This field is required"
+              name="years"
+            >
+              <Checkbox text="I am 18 years old or older " />
+            </Form.Field>
+            <Form.Field
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+              extra="This field is required"
+              name="confirm"
+            >
+              <Checkbox text="Sunt deacord cu prelucrarea datelor personale" />
             </Form.Field>
             <Button size="medium" type="fill" className="submit" submit={true}>
               Sign Up

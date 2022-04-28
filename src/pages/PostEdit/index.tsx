@@ -13,6 +13,7 @@ const PostEdit = () => {
     description: "",
     date: "",
     user: "",
+    image: "",
   });
 
   useEffect(() => {
@@ -99,7 +100,14 @@ const PostEdit = () => {
                   value={post.user}
                   onChange={(e) => onTextFieldChange(e)}
                 />
-
+                <input
+                  type="text"
+                  name="image"
+                  id="image"
+                  placeholder="Image"
+                  value={post.image}
+                  onChange={(e) => onTextFieldChange(e)}
+                />
                 <div className="submit">
                   <Button
                     type="submit"

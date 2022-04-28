@@ -28,6 +28,12 @@ const CreatePost: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
     setDescription(Boolean(e.target.value));
   }
 
+  const [image, setImage] = useState(false);
+  function inputHandlerImage(e: ChangeEvent<HTMLInputElement>) {
+    setPost({ ...post, [e.target.name]: e.target.value });
+    setImage(Boolean(e.target.value));
+  }
+
   const [date, setDate] = useState(false);
   function inputHandlerDate(e: ChangeEvent<HTMLInputElement>) {
     setPost({ ...post, [e.target.name]: e.target.value });
@@ -67,6 +73,7 @@ const CreatePost: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
                 type="text"
                 placeholder="Title"
                 name="title"
+                className="text"
                 onChange={(e) => inputHandlerTitle(e)}
               />
               <textarea
@@ -77,21 +84,34 @@ const CreatePost: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
                 rows={5}
                 onChange={(event) => inputHandlerDescription(event)}
               ></textarea>
-              <input type="date" name="date" onChange={inputHandlerDate} />
+              <input
+                type="date"
+                name="date"
+                onChange={inputHandlerDate}
+                className="text"
+              />
               <input
                 type="text"
                 name="user"
+                className="text"
                 id="user"
                 placeholder="User"
                 onChange={(e) => inputHandlerUser(e)}
               />
-
+              <input
+                type="text"
+                name="image"
+                className="text"
+                id="image"
+                placeholder="Image"
+                onChange={(e) => inputHandlerImage(e)}
+              />
               <div className="submit">
                 <Button
                   type="submit"
                   className="edit--button"
                   onClick={(e) => onFormSubmit(e)}
-                  disabled={!title || !description || !date || !user}
+                  disabled={!title || !description || !date || !user || !image}
                 >
                   Create Post
                 </Button>
