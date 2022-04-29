@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import "./style.scss";
 import {
   Button,
   Form,
@@ -9,26 +7,17 @@ import {
   Radio,
   Checkbox,
 } from "ebs-design";
+import Style from "./styled";
 import PasswordInput from "../../components/PasswordInput";
 import { ChangeEvent, useEffect, useState } from "react";
 import { User } from "../../interfaces";
 import axios from "axios";
-import Dashboard from "../Dashboard";
+import { useAddUserData } from "../../hooks/useUsersData";
+
 import ConfirmPasswordInput from "../../components/ConfirmPasswordInput";
-import PanelDashboard from "../PanelDashboard";
-import Panel from "../Panel";
 import Sign from "../Sign";
 
 const SignUp: React.FC = () => {
-  const [user, setUser] = useState({
-    fullname: "",
-    country: "",
-    number: "",
-    email: "",
-    gender: "",
-    password: "",
-  });
-
   const [form] = useForm();
 
   useEffect(() => {
@@ -38,7 +27,6 @@ const SignUp: React.FC = () => {
   const [success, setSuccess] = useState(false);
 
   const handlerSubmit = async (data: User) => {
-    console.log(data);
     try {
       await axios.post(`http://localhost:3333/users`, data);
       localStorage.setItem("user", JSON.stringify(data));
@@ -112,160 +100,174 @@ const SignUp: React.FC = () => {
     }
   };
 
-  return (
-    <div className="center">
-      {success ? (
-        <Sign />
-      ) : (
-        <div className="form">
-          <Form
-            form={form}
-            onFinish={handlerSubmit}
-            controlOptions={{
-              col: {
-                size: 8,
-              },
-            }}
-            labelOptions={{
-              col: {
-                size: 3,
-              },
-            }}
-            type="vertical"
-          >
-            <Form.Field
-              label="Fullname:"
-              name="fullname"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input size="small" className="field" />
-            </Form.Field>
-            <Form.Field
-              label="Country:"
-              name="country"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input size="small" className="field" />
-            </Form.Field>
-            <Form.Field
-              extra="This field is required"
-              label="Email:"
-              name="email"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input type="email" className="field" />
-            </Form.Field>
+  const { mutate: addUser } = useAddUserData();
 
-            <Form.Field
-              extra="This field is required"
-              label="Gender:"
-              name="gender"
-              rules={[
-                {
-                  required: true,
+  const handleAddUserClick = (data: User) => {
+    addUser(data);
+    setSuccess(true);
+  };
+
+  return (
+    <Style>
+      <div className="center">
+        {success ? (
+          <Sign />
+        ) : (
+          <div className="form">
+            <Form
+              form={form}
+              onFinish={handleAddUserClick}
+              controlOptions={{
+                col: {
+                  size: 8,
                 },
-              ]}
+              }}
+              labelOptions={{
+                col: {
+                  size: 3,
+                },
+              }}
+              type="vertical"
             >
-              <Radio
-                options={[
+              <Form.Field
+                label="Fullname:"
+                name="fullname"
+                rules={[
                   {
-                    text: "Male",
-                    value: "male",
-                  },
-                  {
-                    text: "Female",
-                    value: "female",
+                    required: true,
                   },
                 ]}
-              />
-            </Form.Field>
-            <Form.Field
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-              extra="This field is required"
-              label="Number:"
-              name="number"
-            >
-              <InputPhone country="md" />
-            </Form.Field>
-            <Form.Field
-              extra="This field is required"
-              label="Password:"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <PasswordInput
-              // handlePasswordChange={handlePasswordChange}
-              // handleValidation={handleValidation}
-              // passwordValue={passwordInput.password}
-              // passwordError={passwordError}
-              />
-            </Form.Field>
-            <Form.Field
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-              extra="This field is required"
-              label="Confirm Password:"
-              name="confirmpassword"
-            >
-              <ConfirmPasswordInput
-              // handlePasswordChange={handlePasswordChange}
-              // handleValidation={handleValidation}
-              // confirmPasswordValue={passwordInput.confirmPassword}
-              // confirmPasswordError={confirmPasswordError}
-              />
-            </Form.Field>
-            <Form.Field
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-              extra="This field is required"
-              name="years"
-            >
-              <Checkbox text="I am 18 years old or older " />
-            </Form.Field>
-            <Form.Field
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-              extra="This field is required"
-              name="confirm"
-            >
-              <Checkbox text="Sunt deacord cu prelucrarea datelor personale" />
-            </Form.Field>
-            <Button size="medium" type="fill" className="submit" submit={true}>
-              Sign Up
-            </Button>
-          </Form>
-        </div>
-      )}
-    </div>
+              >
+                <Input size="small" />
+              </Form.Field>
+              <Form.Field
+                label="Country:"
+                name="country"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Input size="small" />
+              </Form.Field>
+              <Form.Field
+                extra="This field is required"
+                label="Email:"
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Input type="email" className="email" />
+              </Form.Field>
+
+              <Form.Field
+                extra="This field is required"
+                label="Gender:"
+                name="gender"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Radio
+                  options={[
+                    {
+                      text: "Male",
+                      value: "male",
+                    },
+                    {
+                      text: "Female",
+                      value: "female",
+                    },
+                  ]}
+                />
+              </Form.Field>
+              <Form.Field
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+                extra="This field is required"
+                label="Number:"
+                name="number"
+              >
+                <InputPhone country="md" />
+              </Form.Field>
+              <Form.Field
+                extra="This field is required"
+                label="Password:"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <PasswordInput
+                // handlePasswordChange={handlePasswordChange}
+                // handleValidation={handleValidation}
+                // passwordValue={passwordInput.password}
+                // passwordError={passwordError}
+                />
+              </Form.Field>
+              <Form.Field
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+                extra="This field is required"
+                label="Confirm Password:"
+                name="confirmpassword"
+              >
+                <ConfirmPasswordInput
+                // handlePasswordChange={handlePasswordChange}
+                // handleValidation={handleValidation}
+                // confirmPasswordValue={passwordInput.confirmPassword}
+                // confirmPasswordError={confirmPasswordError}
+                />
+              </Form.Field>
+              <Form.Field
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+                extra="This field is required"
+                name="years"
+              >
+                <Checkbox text="I am 18 years old or older " />
+              </Form.Field>
+              <Form.Field
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+                extra="This field is required"
+                name="confirm"
+              >
+                <Checkbox text="Sunt deacord cu prelucrarea datelor personale" />
+              </Form.Field>
+              <Button
+                size="medium"
+                type="fill"
+                className="submit"
+                submit={true}
+              >
+                Sign Up
+              </Button>
+            </Form>
+          </div>
+        )}
+      </div>
+    </Style>
   );
 };
 export default SignUp;

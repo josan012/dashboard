@@ -1,49 +1,40 @@
-import Style from "./styled";
+import "./style.scss";
 import Widget from "../Widget";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Post } from "../../interfaces";
 import axios from "axios";
 import Dialog from "../Dialog";
-
-const PageSize = 4;
+import { useQuery } from "react-query";
 
 const PostGrid = () => {
-  const [post, setPosts] = useState<Post[]>([]);
   const [postId, setPostId] = useState<number | null>(null);
-  useEffect(() => {
-    getAllPosts();
-  }, []);
 
-  const getAllPosts = async () => {
-    try {
-      const posts = await axios.get("http://localhost:4444/posts");
-      console.log(posts.data);
-      setPosts(posts.data);
-    } catch (error) {
-      console.log("Something is wrong");
-    }
-  };
   const [query, setQuery] = useState("");
 
   const [content, setContent] = useState<Post[]>([]);
-
+  const fetchData = async () => {
+    const res = await axios.get(`http://localhost:4444/posts?q=${query}`);
+    setContent(res.data);
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get(`http://localhost:4444/posts?q=${query}`);
-      setContent(res.data);
-    };
     if (query.length === 0 || query.length > 2) fetchData();
   }, [query]);
 
+  const { status } = useQuery("posts", fetchData);
   return (
-    <Style>
-      <div className="center">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="search"
-          onChange={(e) => setQuery(e.target.value.toLowerCase())}
-        />
+    <div className="center">
+      <p>{status}</p>
+      <input
+        type="text"
+        placeholder="Search..."
+        className="search"
+        onChange={(e) => setQuery(e.target.value.toLowerCase())}
+      />
+      {status === "loading" && <div>Loading data</div>}
+
+      {status === "error" && <div>Error fetching data</div>}
+
+      {status === "success" && (
         <div className="grid">
           <div className="row">
             {content.map((post, i) => {
@@ -51,7 +42,6 @@ const PostGrid = () => {
                 <Widget
                   post={post}
                   setPostId={setPostId}
-                  onSuccess={() => getAllPosts()}
                   key={i}
                   title={post.title}
                   description={post.description}
@@ -63,18 +53,16 @@ const PostGrid = () => {
             })}
           </div>
         </div>
-      </div>
+      )}
       {postId && (
         <div className="confirm">
           <Dialog
             setPostId={(val) => setPostId(val === null ? val : postId)}
             postId={postId}
-            post={post}
-            onSuccess={() => getAllPosts()}
           />
         </div>
       )}
-    </Style>
+    </div>
   );
 };
 export default PostGrid;

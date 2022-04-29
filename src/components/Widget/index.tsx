@@ -1,4 +1,4 @@
-import Style from "./styled";
+import "./style.scss";
 import DeleteIcon from "../../icons/DeleteIcon";
 import { Link } from "react-router-dom";
 import { Post } from "../../interfaces";
@@ -11,7 +11,6 @@ interface Props {
   user: string;
   image: string;
   setPostId: (postId: number) => void;
-  onSuccess: () => void;
 }
 
 const Widget: React.FC<Props> = ({
@@ -28,25 +27,23 @@ const Widget: React.FC<Props> = ({
     console.log(post.id);
   };
   return (
-    <Style>
-      <div className="widget">
-        <h1>{title}</h1>
-        <p>{description}</p>
-        <span className="date">{date}</span>
-        <span className="util">{user}</span>
-        <div className="image">
-          <img src={image} alt="imagine" />
-        </div>
-        <div className="actions">
-          <span className="edit">
-            <Link to={`/posts/edit/${post.id}`}>Editare</Link>
-          </span>
-          <div className="delete" onClick={deleteContent}>
-            Stergere <DeleteIcon />
-          </div>
+    <div className="widget">
+      <h1>{title}</h1>
+      <p>{description}</p>
+      <span className="date">{date}</span>
+      <span className="util">{user}</span>
+      <div className="image">
+        <img src={image} alt="imagine" />
+      </div>
+      <div className="actions">
+        <span className="edit--link">
+          <Link to={`/posts/edit/${post.id}`}>Editare</Link>
+        </span>
+        <div className="delete" onClick={deleteContent}>
+          Stergere <DeleteIcon />
         </div>
       </div>
-    </Style>
+    </div>
   );
 };
 export default Widget;

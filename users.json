@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "fullname": "Josan Mihai",
+      "fullname": "Mihai Josan",
       "country": "Moldova",
       "number": "068383476",
       "email": "mihai.josan@gmail.com",
@@ -405,19 +405,35 @@
       "id": 52
     },
     {
-      "fullname": "Josan Veronica",
-      "country": "Moldova",
-      "email": "veronica.josan@gmail.com",
-      "gender": "female",
-      "number": "37368404095",
-      "id": 54
-    },
-    {
       "fullname": "Josan Vasile",
       "country": "Moldova",
       "email": "vasile.josan@gmail.com",
       "gender": "male",
       "number": "37368290011",
+      "id": 53
+    },
+    {
+      "fullname": "Gigel Costel",
+      "country": "Moldova",
+      "email": "gigel.costel@gmail.com",
+      "gender": "male",
+      "number": "37368684845",
+      "password": "1234",
+      "confirmpassword": "1234",
+      "years": true,
+      "confirm": true,
+      "id": 54
+    },
+    {
+      "fullname": "fdhfhfhfhfh",
+      "country": "fdhfdhfhfhfh",
+      "email": "hfhhhdfh@dggghfhfh",
+      "gender": "male",
+      "number": "37356665665",
+      "password": "FMFJjheNDz4ZcqT",
+      "confirmpassword": "fgfggfgfgfg",
+      "years": true,
+      "confirm": true,
       "id": 55
     }
   ]

@@ -72,7 +72,7 @@ const Panel = () => {
         </Sidebar.TopMenu>
       </Sidebar>
       <Layout.Content>
-        <Users user={users} />
+        <Users />
       </Layout.Content>
       <Layout.Footer />
     </Layout>

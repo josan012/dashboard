@@ -22,20 +22,6 @@ const Posts: React.FC<Props> = () => {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
-    getAllPosts();
-  }, []);
-
-  const getAllPosts = async () => {
-    try {
-      const posts = await axios.get("http://localhost:4444/posts");
-      console.log(posts.data);
-      setPosts(posts.data);
-    } catch (error) {
-      console.log("Something is wrong");
-    }
-  };
-
   const [print, setPrint] = useState(false);
   const [data, setData] = useState([]);
 
@@ -47,20 +33,11 @@ const Posts: React.FC<Props> = () => {
     }
   }, []);
 
-  const clear = () => {
-    const data = localStorage.setItem("email", JSON.stringify(null));
-    if (data === null) {
-      setData(data);
-    }
-  };
-
   const [switcher, setSwitcher] = useState("card");
   return (
     <Style>
       <div className="center">
-        {isOpen && (
-          <CreatePost setIsOpen={setIsOpen} onSuccess={() => getAllPosts()} />
-        )}
+        {isOpen && <CreatePost setIsOpen={setIsOpen} />}
         <span>
           <Button onClick={togglePopup}>Add</Button>
         </span>
@@ -74,11 +51,7 @@ const Posts: React.FC<Props> = () => {
         {switcher === "card" ? (
           <PostGrid />
         ) : (
-          <PostTabel
-            posts={post}
-            onSuccess={() => getAllPosts()}
-            setPostId={setPostId}
-          />
+          <PostTabel setPostId={setPostId} />
         )}
 
         {postId && (
@@ -86,8 +59,6 @@ const Posts: React.FC<Props> = () => {
             <Dialog
               setPostId={(val) => setPostId(val === null ? val : postId)}
               postId={postId}
-              post={post}
-              onSuccess={() => getAllPosts()}
             />
           </div>
         )}

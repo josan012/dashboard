@@ -135,5 +135,15 @@ export const Style = styled.div`
     width: 80%;
     margin: 0 auto 10px auto;
   }
+
+  .email {
+    width: 400px;
+    margin: 0 auto;
+  }
+
+  input[type="email"] {
+    margin: 0 10px 0 0;
+    width: 400px;
+  }
 `;
 export default Style;

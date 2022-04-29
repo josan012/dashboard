@@ -22,7 +22,11 @@ input {
   display: flex;
   justify-content: center;
 }
-
+.ebs-button__wrapper,
+.ebs-button--medium,
+.ebs-button--ghost {
+  width: 100px;
+}
 span {
   cursor: pointer;
 }

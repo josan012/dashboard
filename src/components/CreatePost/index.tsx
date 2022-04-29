@@ -5,10 +5,9 @@ import Button from "@mui/material/Button";
 
 interface AddProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onSuccess: () => void;
 }
 
-const CreatePost: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
+const CreatePost: React.FC<AddProps> = ({ setIsOpen }) => {
   const [post, setPost] = useState({
     title: "",
     description: "",
@@ -51,9 +50,7 @@ const CreatePost: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
   ) {
     e.preventDefault();
     try {
-      await axios
-        .post(`http://localhost:4444/posts`, post)
-        .then(() => onSuccess());
+      await axios.post(`http://localhost:4444/posts`, post);
       setIsOpen(false);
     } catch (error: any) {
       console.log(error.response.status, error);
