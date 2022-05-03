@@ -1,10 +1,8 @@
 import Style from "./styled";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import CreatePost from "../../components/CreatePost";
 import Button from "@mui/material/Button";
 import Dialog from "../../components/Dialog";
-import { Link } from "react-router-dom";
 import PostTabel from "../../components/PostTabel";
 import { Post } from "../../interfaces";
 import PostGrid from "../../components/PostGrid";
@@ -14,7 +12,6 @@ interface Props {
 }
 
 const Posts: React.FC<Props> = () => {
-  const [post, setPosts] = useState<Post[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [postId, setPostId] = useState<number | null>(null);
 
@@ -34,6 +31,7 @@ const Posts: React.FC<Props> = () => {
   }, []);
 
   const [switcher, setSwitcher] = useState("card");
+
   return (
     <Style>
       <div className="center">
@@ -47,7 +45,6 @@ const Posts: React.FC<Props> = () => {
         <span>
           <Button onClick={() => setSwitcher("card")}>Card</Button>
         </span>
-
         {switcher === "card" ? (
           <PostGrid />
         ) : (

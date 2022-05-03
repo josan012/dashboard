@@ -9,6 +9,7 @@ import Panel from "./pages/Panel";
 import PanelPosts from "./pages/PanelPosts";
 import PanelDashboard from "./pages/PanelDashboard";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 export const App: React.FC = () => {
   const [posts] = useState<Post[]>([]);
@@ -29,6 +30,7 @@ export const App: React.FC = () => {
             <Route path="/panel" element={<Panel />} />
           </Routes>
         </BrowserRouter>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </div>
   );

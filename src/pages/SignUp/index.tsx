@@ -16,9 +16,12 @@ import { useAddUserData } from "../../hooks/useUsersData";
 
 import ConfirmPasswordInput from "../../components/ConfirmPasswordInput";
 import Sign from "../Sign";
+import { useNavigate } from "react-router-dom";
 
 const SignUp: React.FC = () => {
   const [form] = useForm();
+
+  const history = useNavigate();
 
   useEffect(() => {
     console.log(form.getFieldsValue());
@@ -105,167 +108,159 @@ const SignUp: React.FC = () => {
   const handleAddUserClick = (data: User) => {
     addUser(data);
     setSuccess(true);
+    history("/sign");
   };
 
   return (
     <Style>
       <div className="center">
-        {success ? (
-          <Sign />
-        ) : (
-          <div className="form">
-            <Form
-              form={form}
-              onFinish={handleAddUserClick}
-              controlOptions={{
-                col: {
-                  size: 8,
+        <div className="form">
+          <Form
+            form={form}
+            onFinish={handleAddUserClick}
+            controlOptions={{
+              col: {
+                size: 8,
+              },
+            }}
+            labelOptions={{
+              col: {
+                size: 3,
+              },
+            }}
+            type="vertical"
+          >
+            <Form.Field
+              label="Fullname:"
+              name="fullname"
+              rules={[
+                {
+                  required: true,
                 },
-              }}
-              labelOptions={{
-                col: {
-                  size: 3,
-                },
-              }}
-              type="vertical"
+              ]}
             >
-              <Form.Field
-                label="Fullname:"
-                name="fullname"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input size="small" />
-              </Form.Field>
-              <Form.Field
-                label="Country:"
-                name="country"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input size="small" />
-              </Form.Field>
-              <Form.Field
-                extra="This field is required"
-                label="Email:"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input type="email" className="email" />
-              </Form.Field>
+              <Input size="small" />
+            </Form.Field>
+            <Form.Field
+              label="Country:"
+              name="country"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input size="small" />
+            </Form.Field>
+            <Form.Field
+              extra="This field is required"
+              label="Email:"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input type="email" className="email" />
+            </Form.Field>
 
-              <Form.Field
-                extra="This field is required"
-                label="Gender:"
-                name="gender"
-                rules={[
+            <Form.Field
+              extra="This field is required"
+              label="Gender:"
+              name="gender"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Radio
+                options={[
                   {
-                    required: true,
+                    text: "Male",
+                    value: "male",
+                  },
+                  {
+                    text: "Female",
+                    value: "female",
                   },
                 ]}
-              >
-                <Radio
-                  options={[
-                    {
-                      text: "Male",
-                      value: "male",
-                    },
-                    {
-                      text: "Female",
-                      value: "female",
-                    },
-                  ]}
-                />
-              </Form.Field>
-              <Form.Field
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-                extra="This field is required"
-                label="Number:"
-                name="number"
-              >
-                <InputPhone country="md" />
-              </Form.Field>
-              <Form.Field
-                extra="This field is required"
-                label="Password:"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <PasswordInput
-                // handlePasswordChange={handlePasswordChange}
-                // handleValidation={handleValidation}
-                // passwordValue={passwordInput.password}
-                // passwordError={passwordError}
-                />
-              </Form.Field>
-              <Form.Field
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-                extra="This field is required"
-                label="Confirm Password:"
-                name="confirmpassword"
-              >
-                <ConfirmPasswordInput
-                // handlePasswordChange={handlePasswordChange}
-                // handleValidation={handleValidation}
-                // confirmPasswordValue={passwordInput.confirmPassword}
-                // confirmPasswordError={confirmPasswordError}
-                />
-              </Form.Field>
-              <Form.Field
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-                extra="This field is required"
-                name="years"
-              >
-                <Checkbox text="I am 18 years old or older " />
-              </Form.Field>
-              <Form.Field
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-                extra="This field is required"
-                name="confirm"
-              >
-                <Checkbox text="Sunt deacord cu prelucrarea datelor personale" />
-              </Form.Field>
-              <Button
-                size="medium"
-                type="fill"
-                className="submit"
-                submit={true}
-              >
-                Sign Up
-              </Button>
-            </Form>
-          </div>
-        )}
+              />
+            </Form.Field>
+            <Form.Field
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+              extra="This field is required"
+              label="Number:"
+              name="number"
+            >
+              <InputPhone country="md" />
+            </Form.Field>
+            <Form.Field
+              extra="This field is required"
+              label="Password:"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <PasswordInput
+              // handlePasswordChange={handlePasswordChange}
+              // handleValidation={handleValidation}
+              // passwordValue={passwordInput.password}
+              // passwordError={passwordError}
+              />
+            </Form.Field>
+            <Form.Field
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+              extra="This field is required"
+              label="Confirm Password:"
+              name="confirmpassword"
+            >
+              <ConfirmPasswordInput
+              // handlePasswordChange={handlePasswordChange}
+              // handleValidation={handleValidation}
+              // confirmPasswordValue={passwordInput.confirmPassword}
+              // confirmPasswordError={confirmPasswordError}
+              />
+            </Form.Field>
+            <Form.Field
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+              extra="This field is required"
+              name="years"
+            >
+              <Checkbox text="I am 18 years old or older " />
+            </Form.Field>
+            <Form.Field
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+              extra="This field is required"
+              name="confirm"
+            >
+              <Checkbox text="Sunt deacord cu prelucrarea datelor personale" />
+            </Form.Field>
+            <Button size="medium" type="fill" className="submit" submit={true}>
+              Sign Up
+            </Button>
+          </Form>
+        </div>
       </div>
     </Style>
   );

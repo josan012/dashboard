@@ -7,6 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import Pagination from "../Pagination/Pagination";
 import { useQuery } from "react-query";
+import * as api from "../../api/usersAPI";
 
 interface Props {
   setUserId: (userId: number) => void;
@@ -22,16 +23,16 @@ const TableUsers: React.FC<Props> = ({ setUserId }) => {
     const res = await axios.get(`http://localhost:3333/users?q=${query}`);
     setUser(res.data);
   };
-  const { status } = useQuery("users", fetchData);
+  const { data, status } = useQuery("users", api.getUsers);
   const [currentPage, setCurrentPage] = useState(1);
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     return user.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, user]);
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     if (query.length === 0 || query.length > 2) fetchData();
