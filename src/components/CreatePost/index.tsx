@@ -1,14 +1,13 @@
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
-import Style from "./styled";
+import "./style.scss";
 import Button from "@mui/material/Button";
 
 interface AddProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onSuccess: () => void;
 }
 
-const CreatePost: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
+const CreatePost: React.FC<AddProps> = ({ setIsOpen }) => {
   const [post, setPost] = useState({
     title: "",
     description: "",
@@ -28,6 +27,12 @@ const CreatePost: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
     setDescription(Boolean(e.target.value));
   }
 
+  const [image, setImage] = useState(false);
+  function inputHandlerImage(e: ChangeEvent<HTMLInputElement>) {
+    setPost({ ...post, [e.target.name]: e.target.value });
+    setImage(Boolean(e.target.value));
+  }
+
   const [date, setDate] = useState(false);
   function inputHandlerDate(e: ChangeEvent<HTMLInputElement>) {
     setPost({ ...post, [e.target.name]: e.target.value });
@@ -45,9 +50,7 @@ const CreatePost: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
   ) {
     e.preventDefault();
     try {
-      await axios
-        .post(`http://localhost:4444/posts`, post)
-        .then(() => onSuccess());
+      await axios.post(`http://localhost:4444/posts`, post);
       setIsOpen(false);
     } catch (error: any) {
       console.log(error.response.status, error);
@@ -55,54 +58,66 @@ const CreatePost: React.FC<AddProps> = ({ setIsOpen, onSuccess }) => {
   }
 
   return (
-    <Style>
-      <div className="center">
-        <div className="vertical">
-          <div className="form">
-            <div className="title">
-              <p className="signup">Add</p>
-            </div>
-            <div className="center">
-              <form>
-                <input
-                  type="text"
-                  placeholder="Title"
-                  name="title"
-                  onChange={(e) => inputHandlerTitle(e)}
-                />
-                <textarea
-                  name="description"
-                  id="description"
-                  placeholder="Description"
-                  cols={30}
-                  rows={5}
-                  onChange={(event) => inputHandlerDescription(event)}
-                ></textarea>
-                <input type="date" name="date" onChange={inputHandlerDate} />
-                <input
-                  type="text"
-                  name="user"
-                  id="user"
-                  placeholder="User"
-                  onChange={(e) => inputHandlerUser(e)}
-                />
-
-                <div className="submit">
-                  <Button
-                    type="submit"
-                    className="edit"
-                    onClick={(e) => onFormSubmit(e)}
-                    disabled={!title || !description || !date || !user}
-                  >
-                    Create Post
-                  </Button>
-                </div>
-              </form>
-            </div>
+    <div className="center">
+      <div className="vertical">
+        <div className="form">
+          <div className="title">
+            <p className="signup">Add</p>
+          </div>
+          <div className="center">
+            <form>
+              <input
+                type="text"
+                placeholder="Title"
+                name="title"
+                className="text"
+                onChange={(e) => inputHandlerTitle(e)}
+              />
+              <textarea
+                name="description"
+                id="description"
+                placeholder="Description"
+                cols={30}
+                rows={5}
+                onChange={(event) => inputHandlerDescription(event)}
+              ></textarea>
+              <input
+                type="date"
+                name="date"
+                onChange={inputHandlerDate}
+                className="text"
+              />
+              <input
+                type="text"
+                name="user"
+                className="text"
+                id="user"
+                placeholder="User"
+                onChange={(e) => inputHandlerUser(e)}
+              />
+              <input
+                type="text"
+                name="image"
+                className="text"
+                id="image"
+                placeholder="Image"
+                onChange={(e) => inputHandlerImage(e)}
+              />
+              <div className="submit">
+                <Button
+                  type="submit"
+                  className="edit--button"
+                  onClick={(e) => onFormSubmit(e)}
+                  disabled={!title || !description || !date || !user || !image}
+                >
+                  Create Post
+                </Button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    </Style>
+    </div>
   );
 };
 export default CreatePost;

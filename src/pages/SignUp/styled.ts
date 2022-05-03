@@ -8,8 +8,9 @@ export const Style = styled.div`
   }
 
   .ebs-button__wrapper,
-  .ebs-button--medium.submit {
-    width: 100px;
+  .ebs-button--medium,
+  .submit {
+    width: 100%;
     height: fit-content;
     color: #0288d1;
     background-color: #fff;
@@ -33,13 +34,14 @@ export const Style = styled.div`
 
   .ebs-input__container,
   .ebs-input__phone,
-  .has-error,
-  .react-tel-input,
+  .react-tel-input {
+    width: 400px;
+  }
+
   .ebs-form__field__explain,
-  .ebs-form__field__extra,
-  .ebs-radio__wrapper,
-  .has-text {
-    width: 300px;
+  .ebs-form__field__extra {
+    width: 400px;
+    margin-left: 60px;
   }
 
   .col,
@@ -47,28 +49,47 @@ export const Style = styled.div`
   .col-8 {
     padding-left: 0;
   }
-  .ebs-button__wrapper,
-  .ebs-button--medium,
-  .ebs-button--fill,
-  .submit {
-    margin: 0 auto;
+
+  .ebs-checkbox__wrapper,
+  .ebs-checkbox--left,
+  .has-text {
+    width: 400px;
   }
 
-  .ebs-button__wrapper,
-  .ebs-button--medium,
-  .ebs-button--fill,
-  .submit {
-    width: 100px;
-    margin-bottom: 10px;
+  .ebs-input__suffix,
+  .not-clickable,
+  img {
+    width: 25px;
+    height: 25px;
   }
 
   .ebs-button__wrapper:hover,
   .ebs-button--medium:hover,
-  .ebs-button--fill:hover,
   .submit:hover {
-    width: 100px;
-    background-color: #0288d1;
     color: #fff;
+    background-color: #0288d1;
+  }
+
+  .ebs-input .ebs-input--medium .email {
+    margin-left: 40px;
+  }
+  .form-control {
+    margin-right: 0;
+  }
+  .ebs-input__phone,
+  .react-tel-input {
+    margin-left: 10px;
+  }
+
+  .ebs-input__type--email,
+  .email {
+    margin-left: 20px;
+    margin-right: 0;
+    width: 400px;
+  }
+
+  input {
+    border: none;
   }
 `;
 export default Style;

@@ -1,0 +1,71 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form {
+  width: 600px;
+}
+
+.signup {
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+.title {
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  padding: 20px 0;
+  text-indent: 15px;
+  border-radius: 10px;
+  height: 20px;
+  border: 1px solid #dcdcdc;
+  margin-bottom: 10px;
+}
+
+.edit {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  padding: 10px 0 15px;
+  background-color: #2196f3;
+  color: white;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+textarea {
+  width: 80%;
+  margin: 0 auto;
+  text-indent: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  resize: none;
+}

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Style from "./styled";
+import "./style.scss";
 import Button from "@mui/material/Button";
 
 const PostEdit = () => {
@@ -13,6 +13,7 @@ const PostEdit = () => {
     description: "",
     date: "",
     user: "",
+    image: "",
   });
 
   useEffect(() => {
@@ -60,56 +61,66 @@ const PostEdit = () => {
     console.log(post);
   }
   return (
-    <Style>
-      <div className="center">
-        <div className="vertical">
-          <div className="form">
-            <div className="title">
-              <p className="signup">Edit</p>
-            </div>
-            <div className="center">
-              <form>
-                <input
-                  type="text"
-                  placeholder="Title"
-                  name="title"
-                  value={post.title}
-                  onChange={(e) => onTextFieldChange(e)}
-                />
-                <textarea
-                  id="description"
-                  cols={30}
-                  rows={10}
-                  name="description"
-                  placeholder="description"
-                  value={post.description}
-                  onChange={(event) => onTextAreaChange(event)}
-                ></textarea>
-                <input type="date" name="date" onChange={inputHandlerDate} />
-                <input
-                  type="text"
-                  name="user"
-                  id="user"
-                  placeholder="User"
-                  value={post.user}
-                  onChange={(e) => onTextFieldChange(e)}
-                />
-
-                <div className="submit">
-                  <Button
-                    type="submit"
-                    className="edit"
-                    onClick={(e) => onFormSubmit(e)}
-                  >
-                    <Link to="/">Edit</Link>
-                  </Button>
-                </div>
-              </form>
-            </div>
+    <div className="center">
+      <div className="vertical">
+        <div className="form">
+          <div className="title">
+            <p className="signup">Edit</p>
+          </div>
+          <div className="center">
+            <form>
+              <input
+                type="text"
+                placeholder="Title"
+                name="title"
+                value={post.title}
+                onChange={(e) => onTextFieldChange(e)}
+              />
+              <textarea
+                id="description"
+                cols={30}
+                rows={10}
+                name="description"
+                placeholder="description"
+                value={post.description}
+                onChange={(event) => onTextAreaChange(event)}
+              ></textarea>
+              <input
+                type="date"
+                name="date"
+                onChange={inputHandlerDate}
+                value={post.date}
+              />
+              <input
+                type="text"
+                name="user"
+                id="user"
+                placeholder="User"
+                value={post.user}
+                onChange={(e) => onTextFieldChange(e)}
+              />
+              <input
+                type="text"
+                name="image"
+                id="image"
+                placeholder="Image"
+                value={post.image}
+                onChange={(e) => onTextFieldChange(e)}
+              />
+              <div className="submit">
+                <Button
+                  type="submit"
+                  className="edit"
+                  onClick={(e) => onFormSubmit(e)}
+                >
+                  <Link to="/">Edit</Link>
+                </Button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    </Style>
+    </div>
   );
 };
 export default PostEdit;

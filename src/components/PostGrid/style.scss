@@ -1,0 +1,15 @@
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 900px;
+  height: fit-content;
+  gap: 20px;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  width: 100%;
+}

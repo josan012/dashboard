@@ -4,11 +4,12 @@ export const Style = styled.div`
   .center {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   .form {
     width: 500px;
-    height: auto;
+    height: fit-content;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -133,6 +134,16 @@ export const Style = styled.div`
     display: block;
     width: 80%;
     margin: 0 auto 10px auto;
+  }
+
+  .email {
+    width: 400px;
+    margin: 0 auto;
+  }
+
+  input[type="email"] {
+    margin: 0 10px 0 0;
+    width: 400px;
   }
 `;
 export default Style;

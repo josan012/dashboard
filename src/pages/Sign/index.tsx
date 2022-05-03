@@ -1,10 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Style from "./styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
-import users from "../../users.json";
-import Dashboard from "../Dashboard";
+import PanelDashboard from "../PanelDashboard";
+import {
+  clearAuthTokens,
+  getAccessToken,
+  getRefreshToken,
+  isLoggedIn,
+  setAuthTokens,
+} from "axios-jwt";
+import axios from "axios";
 
 interface errorMessages {
   name: string;
@@ -16,6 +23,8 @@ interface errorMessages {
 // parola:   abcd1234A@
 
 const Sign: React.FC = () => {
+  const history = useNavigate();
+
   const [data, setData] = useState(null);
   const [print, setPrint] = useState(false);
 
@@ -37,26 +46,28 @@ const Sign: React.FC = () => {
     password: "invalid password",
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-
+    let IDvalue = "";
     let { email, password } = document.forms[0];
+    let res = await axios.get("http://localhost:3333/users");
+    let data = res.data;
+    const userData = data.find((user: any) => user.email === email.value);
 
-    // Find user login info
-    const userData = users.users.find(
-      (user: any) => user.email === email.value
-    );
-
-    // Compare user info
     if (userData) {
       if (userData.password !== password.value) {
-        // Invalid password
         setErrorMessages({ name: "password", message: errors.password });
       } else {
         setIsSubmitted(true);
+        history("/dashboard");
+        IDvalue = userData.id;
+
+        setAuthTokens({
+          accessToken: IDvalue,
+          refreshToken: data.refresh_token,
+        });
       }
     } else {
-      // Username not found
       setErrorMessages({ name: "email", message: errors.email });
     }
   };
@@ -65,14 +76,13 @@ const Sign: React.FC = () => {
     name === errorMessages?.name && (
       <div className="error">{errorMessages?.message}</div>
     );
-  console.log(errorMessages?.message);
 
   return (
     <Style>
-      <div className="center">
-        {isSubmitted ? (
-          <Dashboard />
-        ) : (
+      {isSubmitted ? (
+        <PanelDashboard />
+      ) : (
+        <div className="center">
           <div className="form">
             <div className="title">
               <p className="signin">Sign In</p>
@@ -115,8 +125,8 @@ const Sign: React.FC = () => {
               </div>
             </form>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </Style>
   );
 };

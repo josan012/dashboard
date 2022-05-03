@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "fullname": "Josan Mihai",
+      "fullname": "Mihai Josan",
       "country": "Moldova",
       "number": "068383476",
       "email": "mihai.josan@gmail.com",
@@ -71,14 +71,6 @@
       "email": "plosnita.dumitru@gmail.com",
       "gender": "male",
       "id": 9
-    },
-    {
-      "fullname": "Plamadeala Nicolae",
-      "country": "Moldova",
-      "number": "123456789",
-      "email": "nicu.plamadeala@gmail.com",
-      "gender": "male",
-      "id": 10
     },
     {
       "id": 11,
@@ -151,14 +143,6 @@
       "email": "plosnita.dumitru@gmail.com",
       "gender": "male",
       "id": 19
-    },
-    {
-      "fullname": "Plamadeala Nicolae",
-      "country": "Moldova",
-      "number": "123456789",
-      "email": "nicu.plamadeala@gmail.com",
-      "gender": "male",
-      "id": 20
     },
     {
       "id": 21,
@@ -419,6 +403,38 @@
       "password": "123!A123a",
       "confirmPassword": "123!A123a",
       "id": 52
+    },
+    {
+      "fullname": "Josan Vasile",
+      "country": "Moldova",
+      "email": "vasile.josan@gmail.com",
+      "gender": "male",
+      "number": "37368290011",
+      "id": 53
+    },
+    {
+      "fullname": "Gigel Costel",
+      "country": "Moldova",
+      "email": "gigel.costel@gmail.com",
+      "gender": "male",
+      "number": "37368684845",
+      "password": "1234",
+      "confirmpassword": "1234",
+      "years": true,
+      "confirm": true,
+      "id": 54
+    },
+    {
+      "fullname": "Marcel Spataru",
+      "country": "Romania",
+      "email": "marcel.spataru@gmail.com",
+      "gender": "male",
+      "number": "37368383535",
+      "password": "1234",
+      "confirmpassword": "1234",
+      "years": true,
+      "confirm": true,
+      "id": 56
     }
   ]
 }
